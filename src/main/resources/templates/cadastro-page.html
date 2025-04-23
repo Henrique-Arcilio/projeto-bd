@@ -8,12 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/style-cadastro.css">
+    <link rel="stylesheet" href="src/main/resources/static/css/style-cadastro.css">
 </head>
 <body>
     <div class="cadastro-page display-flex">
         <div class="title">
-            <h1>Cadastro</h1>
+            <h1 th:text="${cpfcliente}"></h1>
         </div>
         <div class="cadastro-area display-flex">
             <form action="/save" method="POST">

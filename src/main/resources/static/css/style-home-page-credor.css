@@ -31,7 +31,18 @@ body {
 
 }
 
+.solicitacoes-de-emprestimo .solicitacoes h2{
+    width: 10rem;
+}
+
 .solicitacoes-info{
-    flex-direction: row;
+    background-color: rgb(167, 167, 167);
     gap: 1rem;
+    width: 25rem;
+    justify-content: space-around;
+    
+}
+
+.solicitacoes-aprovadas{
+    
 }
