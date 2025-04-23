@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans";
+}
+
+body {
+    
+}
+
+.display-flex {
+    display: flex;
+}
+
+.home-page-cliente  {
+    height: 100vh;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.home-area-cliente {
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.emprestimo-atual {
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.emprestimo-atual .emprestimo h3{
+    width: 10rem;
+}
+
+.emprestimo-info {
+    background-color: rgb(167, 167, 167);
+    gap: 1rem;
+    width: 25rem;
+    justify-content: space-around;
+}
+
+
+.credores-disponiveis {
+    background-color: rgb(155, 155, 155);
+    flex-direction: column;
+    align-items: center;
+
+    height: 30vh;
+}
+
+.credores-lista {
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.historico {
+    background-color: rgb(155, 155, 155);
+    flex-direction: column;
+    align-items: center;
+    height: 30vh;
+
+}
+
+.historico-lista {
+    gap: 2rem;
+}

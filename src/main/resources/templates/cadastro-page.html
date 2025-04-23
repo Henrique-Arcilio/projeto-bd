@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditage - Cadastro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style-cadastro.css">
+</head>
+<body>
+    <div class="cadastro-page display-flex">
+        <div class="title">
+            <h1>Cadastro</h1>
+        </div>
+        <div class="cadastro-area display-flex">
+            <form action="/save" method="POST">
+                <div class="row">
+                    <label for="name">Nome Completo</label>
+                    <input name="name" id="name">
+                </div>
+
+                <div class="row">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email">
+                </div>
+
+                <div class="row">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                
+                <div class="row">
+                    <label for="cpf">CPF</label>
+                    <input name="cpf" id="cpf">
+
+                </div>
+                    
+                <div class="row">
+                    <label>Tipo de Conta:</label>
+                    <input type="radio" name = "status" value="credor">
+                    <label for="status">Cliente</label>
+                    <input type="radio" name = "status" value="cliente">
+                    <label for="status">Credor</label>
+                </div>
+                
+                <button>Cadastrar</button>
+                <a href="login-page.html">login</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

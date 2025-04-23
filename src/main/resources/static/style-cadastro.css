@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans";
+}
+
+.display-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro-page {
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.cadastro-area {
+    background: rgb(194, 193, 193);
+    height: 40vh;
+    align-items: center;
+    text-align: center;
+
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    padding: 10px;
+    gap: 40px 10px;
+}
