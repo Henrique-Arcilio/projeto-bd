@@ -11,9 +11,9 @@ import java.util.UUID;
 
 
 @NoArgsConstructor
-@Entity
 @Getter
 @Setter
+@MappedSuperclass
 public class Usuario {
 
     @Id
@@ -32,13 +32,10 @@ public class Usuario {
     private LocalDate dataNascimento;
 
     public Usuario(String nome, String CPF, String password, String endereco, LocalDate dataNascimento) {
-        this.id = id;
         this.nome = nome;
         this.CPF = CPF;
         this.password = password;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
     }
-
-
 }
