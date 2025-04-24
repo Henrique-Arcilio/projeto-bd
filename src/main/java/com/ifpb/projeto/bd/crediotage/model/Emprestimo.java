@@ -35,4 +35,5 @@ public class Emprestimo {
     @ManyToOne
     @JoinColumn(name = "fk_credor")
     private Credor credor;
+
 }
