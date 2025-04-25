@@ -1,5 +1,7 @@
 package com.ifpb.projeto.bd.crediotage;
 
+import com.ifpb.projeto.bd.crediotage.model.Cliente;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.springframework.boot.SpringApplication;
