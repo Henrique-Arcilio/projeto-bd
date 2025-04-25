@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Creditage - Login</title>
-    <link rel="stylesheet" href="/css/style-login.css">
+    <link rel="stylesheet" href="../static/css/style-login.css">
+    <link rel="shortcut icon" href="../static/image/icon.jpg" type="image/x-icon">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -12,21 +14,29 @@
 </head>
 <body>
     <div class="login-page display-flex">
-        <div class="title">
-            <h1>Login</h1>
-        </div>
+    
         <div class="login-area display-flex">
+            <div class="title">
+                <h1>Login</h1>
+            </div>
+
             <form action="/login"method="POST" >
                 <div class="row">
-                    <label for="cpf">CPF</label>
-                    <input name="cpf" id="cpf">
+                    <label class="label" for="cpf">CPF</label>
+                    <input class="input" name="cpf" id="cpf">
                 </div>
+
                 <div class="row">
-                    <label for="senha">Senha</label>
-                    <input name="senha" id="senha" type="password">
+                    <label class="label" for="senha">Senha</label>
+                    <input class="input" name="senha" id="senha" type="password">
                 </div>
-                <button type="submit">Logar</button>
-                <a class="btn-criar-conta" href="/cadastro">Criar Conta</a>
+
+                <div class="button-form">
+                    <button type="submit">Logar</button>
+                </div>
+                
+                <a class="btn-criar-conta" href="cadastro-page.html">Criar Conta</a>
+
             </form>
         </div>
     </div>

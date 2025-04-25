@@ -4,22 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="shortcut icon" href="../static/image/icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style-home-page-cliente.css">
     <title>Cregitage</title>
-    <style>
-        table, th, td{
-            border: 1px solid black;
-            max-width: fit-content;
-        }
-        table.center{
-            margin-left: auto;
-            margin-right: auto;
-        }
 
-    </style>
 </head>
 <body>
     <div class="home-page-cliente display-flex">
@@ -27,6 +18,7 @@
             <h1>Creditage</h1>
         </div>
         <div class="home-area-cliente display-flex">
+
             <div class="emprestismo-atual-info display-flex">
                 <div class="emprestimo-atual display-flex">
                     <div class="emprestimo">
@@ -61,14 +53,24 @@
                 <div class="title">
                     <h3>Credores Disponiveis</h3>
                 </div>
-                <div class="credores-lista display-flex">
-                    <div class="credores-nomes">
-                        <h4>Nome</h4>
-                    </div>
-                    <div class="credores-juros">
-                        <h4>Juros</h4>
-                    </div>
+                <div class="credores-lista display-flex ">
+                    <table class="tabela-credores ">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Juros</th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.54%</td>
+                                <td>Yasmin Sarinho</td>
+
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -78,12 +80,21 @@
                 </div>
 
                 <div class="historico-lista display-flex">
-                    <div class="status">
-                        <h4>Status</h4>
-                    </div>
-                    <div class="credor-nome">
-                        <h4>Nome</h4>
-                    </div>
+                    <table class="tabela-historico ">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Yasmin Sarinho</td>
+                                <td>21/01/2025</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

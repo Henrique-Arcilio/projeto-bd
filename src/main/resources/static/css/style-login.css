@@ -2,6 +2,13 @@
     margin: 0;
     padding: 0;
     font-family: "Open Sans";
+
+    --branco: #F9F7F7;
+    --azul-claro: #DBE2EF;
+    --azul: #3F72AF;
+    --azul-escuro: #112D4E;
+    --preto-claro: #181b1f;
+    --preto-escuro: #000000;
 }
 
 
@@ -14,25 +21,96 @@
     align-items: center;
     height: 100vh;
     justify-content: center;
+    background-color: var(--azul-claro);
+
 
 }
 
 .login-area {
-    background: rgb(194, 193, 193);
-    height: 40vh;
+    background-color: var(--branco);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 1rem;
+
+    height: 50vh;
+    width: 50vw;
+
     align-items: center;
     text-align: center;
+    justify-content: space-evenly;
 
-    justify-content: center;
-    
 }
 
 .row {
-    display: flex;
+    display: row;
     padding: 10px;
-    gap: 40px 10px;
 }
 
 .btn-criar-conta {
     font-size: 14px;
+}
+
+
+.input {
+  max-width: 190px;
+  height: 44px;
+
+  background-color: #05060f11;
+
+  border-radius: .5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  
+  font-size: 1rem;
+  transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+.label {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .9rem;
+  font-weight: bold;
+  color: var(--preto-escuro);
+  transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+.input:hover, .input:focus, .input-group:hover .input {
+  outline: none;
+  border-color: var(--preto-claro);
+}
+
+.input-group:hover .label, .input:focus {
+  color: #05060fc2;
+}
+
+button {
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    padding: 1em 1.8em;
+
+    color: var(--branco);
+    background: var(--azul);
+    font-weight: bold;
+
+    text-align: center;
+
+    transition: 0.2s background;
+}
+  
+button:hover {
+    background-color: var(--azul-escuro);
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    gap: 1rem;
+}
+
+.login-area form a {
+    text-decoration: none;
+    color: var(--preto-claro);
 }
