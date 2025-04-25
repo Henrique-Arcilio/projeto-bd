@@ -14,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @MappedSuperclass
+@DiscriminatorColumn(name="Tipo", discriminatorType= DiscriminatorType.STRING)
 public class Usuario {
 
     @Id
@@ -22,6 +23,8 @@ public class Usuario {
 
     @Column(nullable = false, length = 100)
     private String nome;
+    @Column(nullable=false)
+    private String email;
     @Column(nullable = false, length = 11)
     private String CPF;
     @Column(nullable = false, length = 22)
@@ -31,8 +34,9 @@ public class Usuario {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
-    public Usuario(String nome, String CPF, String password, String endereco, LocalDate dataNascimento) {
+    public Usuario(String nome, String email, String CPF, String password, String endereco, LocalDate dataNascimento) {
         this.nome = nome;
+        this.email = email;
         this.CPF = CPF;
         this.password = password;
         this.endereco = endereco;

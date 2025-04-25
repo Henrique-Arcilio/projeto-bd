@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/main/resources/static/css/style-cadastro.css">
+    <link rel="stylesheet" href="/css/style-cadastro.css">
 </head>
 <body>
     <div class="cadastro-page display-flex">
@@ -26,6 +26,7 @@
                     <label for="email">E-mail</label>
                     <input type="email" name="email" id="email">
                 </div>
+                
 
                 <div class="row">
                     <label for="password">Senha</label>
@@ -34,20 +35,30 @@
                 
                 <div class="row">
                     <label for="cpf">CPF</label>
-                    <input name="cpf" id="cpf">
+                    <input name="cpf" id="cpf" maxlength="11" pattern="\d{11}" title="Digite apenas números">
 
+                </div>
+
+                <div class="row">
+                    <label for="endereco">endereco</label>
+                    <input type="endereco" name="endereco" id="endereco">
                 </div>
                     
                 <div class="row">
                     <label>Tipo de Conta:</label>
-                    <input type="radio" name = "status" value="credor">
-                    <label for="status">Cliente</label>
-                    <input type="radio" name = "status" value="cliente">
-                    <label for="status">Credor</label>
+                    <input type="radio" name = "tipo" value="credor">
+                    <label for="tipo">Cliente</label>
+                    <input type="radio" name = "tipo" value="cliente">
+                    <label for="tipo">Credor</label>
+                </div>
+                
+                <div class="row">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input type="date" name="dataNascimento" id="dataNascimento">
                 </div>
                 
                 <button>Cadastrar</button>
-                <a href="login-page.html">login</a>
+                <a href="/login">login</a>
             </form>
         </div>
     </div>

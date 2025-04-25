@@ -2,10 +2,17 @@
     margin: 0;
     padding: 0;
     font-family: "Open Sans";
+
+    --branco: #F9F7F7;
+    --azul-claro: #DBE2EF;
+    --azul: #3F72AF;
+    --azul-escuro: #112D4E;
+    --preto-claro: #181b1f;
+    --preto-escuro: #000000;
 }
 
 body {
-    
+    background-color: var(--preto-claro);
 }
 
 .display-flex {
@@ -25,22 +32,33 @@ body {
     gap: 2rem;
 }
 
+
 .emprestimo-atual {
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.emprestimo-atual .emprestimo h3{
+.emprestimo-atual .emprestimo h3 {
     width: 10rem;
 }
 
+.emprestismo-atual-info {
+    background-color: var(--branco);
+    width: 30rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
 .emprestimo-info {
-    background-color: rgb(167, 167, 167);
     gap: 1rem;
-    width: 25rem;
+    width: 30rem;
     justify-content: space-around;
 }
 
+.tabela-emprestimo-atual {
+    width: 30rem;
+}
 
 .credores-disponiveis {
     background-color: rgb(155, 155, 155);
@@ -48,6 +66,7 @@ body {
     align-items: center;
 
     height: 30vh;
+    border-radius: 1rem;
 }
 
 .credores-lista {
@@ -60,9 +79,32 @@ body {
     flex-direction: column;
     align-items: center;
     height: 30vh;
-
+    border-radius: 1rem;
 }
 
 .historico-lista {
     gap: 2rem;
 }
+
+
+
+/* tabela*/
+
+table {  
+    font-family:sans-serif;
+    th, td {
+      padding:.25em .5em;
+      text-align:left;
+      &:nth-child(2) {
+        text-align:right;
+      }
+    }
+    td {
+      background-color:var(--branco);    
+    }
+    th {
+      background-color:var(--azul);
+      color:var(--branco);
+    }
+}
+
