@@ -38,7 +38,7 @@
 }
 
 .row {
-    display: row;
+    flex-direction: row;
     padding: 10px;
 }
 

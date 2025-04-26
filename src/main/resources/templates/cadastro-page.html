@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../static/css/style-cadastro.css">
-    <link rel="shortcut icon" href="../static/image/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style-cadastro.css">
+    <link rel="shortcut icon" href="/image/icon.jpg" type="image/x-icon">
 </head>
 <body>
     <div class="cadastro-page display-flex">
@@ -55,14 +55,16 @@
 
                 <div class="row radio">
                     <label class="label" >Tipo de Conta:</label>
-                    <input type="radio" name = "tipo" value="credor">
-                    <label for="tipo">Cliente</label>
+
                     <input type="radio" name = "tipo" value="cliente">
-                    <label for="tipo">Credor</label>
+                    <label>Cliente</label>
+
+                    <input type="radio" name = "tipo" value="credor">
+                    <label>Credor</label>
                 </div>
                 
                 <button>Cadastrar</button>
-                <a href="login-page.html">Login</a>
+                <a href="/login">Login</a>
             </form>
         </div>
     </div>

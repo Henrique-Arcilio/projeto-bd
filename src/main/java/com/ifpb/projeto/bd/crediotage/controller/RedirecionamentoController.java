@@ -14,13 +14,23 @@ public class RedirecionamentoController {
     }
 
     @GetMapping("/login")
-        public String showLogin() {
-            return "login-page";
-        }
+    public String showLogin() {
+        return "login-page";
+    }
 
     @GetMapping("/cadastro")
-        public String getMethodName() {
-            return "cadastro-page";
+    public String getMethodName() {
+        return "cadastro-page";
+    }
+
+    @GetMapping("/home")
+    public String redirectCredor(String tipo){
+        if (tipo.equals(tipo)){
+            return "home-page-credor";
+        } else {
+            return "home-page-cliente";
         }
-        
+    }
+
+
 }

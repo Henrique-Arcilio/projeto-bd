@@ -2,6 +2,8 @@ package com.ifpb.projeto.bd.crediotage.service;
 
 import java.time.LocalDate;
 
+import com.ifpb.projeto.bd.crediotage.dao.ClienteDAO;
+import com.ifpb.projeto.bd.crediotage.dao.CredorDAO;
 import org.springframework.stereotype.Service;
 
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
@@ -21,22 +23,24 @@ public class CadastroService {
     private EntityManager em;
 
     public void criarUsuario(String name, String email, String cpf, String password, String endereco,LocalDate dataNascimento, String tipo){
-        
-        Usuario usuario;
-        if(tipo.equals("Cliente")){
-            usuario = new Cliente(name,email, cpf, password, endereco, dataNascimento);
-        } else{
-            usuario = new Credor(name, email, cpf, password, endereco, dataNascimento);
-        }
-        
+
         emf = Persistence.createEntityManagerFactory("crediotage");
         em = emf.createEntityManager();
-        EntityTransaction transacao = em.getTransaction();
-        
-        transacao.begin();
-        em.persist(usuario);
-        transacao.commit();
+
+
+        if(tipo.equals("cliente")){
+            Cliente cliente = new Cliente(name,email, cpf, password, endereco, dataNascimento);
+            ClienteDAO c = new ClienteDAO(em);
+            c.salvar(cliente);
+        } else if(tipo.equals("credor")){
+            Credor credor = new Credor(name, email, cpf, password, endereco, dataNascimento);
+            CredorDAO c = new CredorDAO(em);
+            c.salvar(credor);
+        }
+
         em.close();
         emf.close();
     }
+
+
 }
