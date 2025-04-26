@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="../static/image/icon.jpg" type="image/x-icon">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="../static/css/style-home-page-credor.css">
     
-    <title>Creditage - Incio</title>
+    <title>Crediotage - Incio</title>
     <style>
         table, th, td{
             border: 1px solid black
@@ -22,96 +25,34 @@
 </head>
 <body>
     <div class="home-page-credor display-flex">
-        <div class="title">
-            <h1>Credor Teste</h1>
-        </div>
         <div class="home-area-credor display-flex">
+            <div class="title">
+                <h1>Crediotage</h1>
+            </div>
             <div class="solicitacoes-de-emprestimo display-flex">
                 <div class="solicitacoes display-flex">
-                    <h2>Solicitações de Emprestimo</h2>
+                    <h3>Solicitações de Emprestimo</h3>
                 </div>
                 <div class="solicitacoes-info display-flex">
-                    <scroll-container>
-                        scroll-container{
-                            
-                        }
-                    <scroll-container>
-                    <table class="center">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Valor Solicitado</th>
-                            <th>Data proposta</th>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr><tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr><tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
+                    <table class="tabela-style tabela-solicitacoes">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Valor Solicitado</th>
+                                <th>Data proposta</th>
+                                <th>Selecionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lucas</td>
+                                <td>R$2000</td>
+                                <td>27/08/2025</td>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                            </tr>
+                        </tbody>         
                     </table>
                 </div>
 
@@ -120,14 +61,30 @@
                     <button>Negar</button>
                 </div>
             </div>
+
             <div class="solicitacoes-aprovadas display-flex">
                 <div class="title">
                     <h3>Solicitações aprovadas</h3>
                 </div>
 
-                <div class="solicitacoes-aprovadas-lista display-flex">
-                    <div class="status">Status</div>
-                </div>
+                <table class="solicitacoes tabela-style">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor Solicitado</th>
+                            <th>Data proposta</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lucas</td>
+                            <td>R$2000</td>
+                            <td>27/08/2025</td>
+                            <td>Aprovado</td>
+                        </tr>
+                    </tbody>         
+                </table>
             </div>
         </div>
 

@@ -2,10 +2,13 @@
     margin:0;
     padding:0;
     font-family: "Open Sans";
-}
 
-body {
-
+    --branco: #F9F7F7;
+    --azul-claro: #DBE2EF;
+    --azul: #3F72AF;
+    --azul-escuro: #112D4E;
+    --preto-claro: #181b1f;
+    --preto-escuro: #000000;
 }
 
 .display-flex{
@@ -14,55 +17,88 @@ body {
 
 .home-page-credor {
     height: 100vh;
+    background-color: var(--azul-claro);
 
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+
 }
 
 .home-area-credor{
     flex-direction: column;
+    text-align: center;
     gap: 2rem;
 }
 
-.solicitacoes-de-emprestimo{
-    background-color: rgb(155, 155, 155);
+.solicitacoes-de-emprestimo, .solicitacoes-aprovadas{
+    background-color: var(--branco);
     flex-direction: column;
     align-items: center;
-    max-width: fit-content;
+
+    width: 35rem;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     height: 40vh;
-
 }
 
-.solicitacoes-de-emprestimo .solicitacoes h2{
-    justify-content: center;
-    text-align: center;
-    width: 25rem;
+.solicitacoes-de-emprestimo {
+    gap: 2rem;
 }
 
-.solicitacoes-info{
-    background-color: rgb(196, 13, 13);
-    gap: 1rem;
-    width: 25rem;
-    scroll-behavior: auto;
-    max-height: fit-content;
-    justify-content: center;
-    
+.solicitacoes-aprovadas {
+    gap: 2rem;
 }
+
 .botoes-aceitar-negar{
     align-self: auto;
     display: in-line;
     gap: 10px;
 }
 
-.solicitacoes-aprovadas{
-    background-color: rgb(155, 155, 155);
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    height: 30vh;
+
+.tabela-style {  
+    font-family:sans-serif;
+    width: 30rem;
+    text-align: center;
+    border: none;
+    th, td {
+      padding:.25em .5em;
+      text-align:center;
+      &:nth-child(2) {
+        text-align:center;
+      }
+    }
+    td {
+      background-color:var(--azul-claro);    
+      border: none;
+    }
+    th {
+      background-color:var(--azul);
+      color:var(--branco);
+      align-items: center;
+      border: none;
+    }
 }
 
-.solicitacoes-aprovadas-lista{
-    gap: 2rem;
+button {
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    padding: .5em 1em;
+
+    color: var(--branco);
+    background: var(--azul);
+    font-weight: bold;
+
+    text-align: center;
+
+    transition: 0.2s background;
+}
+
+button:hover {
+    background-color: var(--azul-escuro);
+    cursor: pointer;
 }
