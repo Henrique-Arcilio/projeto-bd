@@ -1,18 +1,23 @@
 package com.ifpb.projeto.bd.crediotage.dao;
 
-import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import com.ifpb.projeto.bd.crediotage.model.Credor;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class CredorDAO implements DAO<Credor> {
+    private EntityManagerFactory emf;
     private EntityManager entityManager;
 
-    public CredorDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public CredorDAO(EntityManagerFactory emf) {
+        this.emf = emf;
+        this.entityManager = emf.createEntityManager();
     }
 
     @Override

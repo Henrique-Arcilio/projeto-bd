@@ -2,16 +2,22 @@ package com.ifpb.projeto.bd.crediotage.dao;
 
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ClienteDAO implements DAO<Cliente>{
+    private EntityManagerFactory emf;
     private EntityManager entityManager;
 
-    public ClienteDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public ClienteDAO(EntityManagerFactory emf) {
+        this.emf = emf;
+        entityManager = emf.createEntityManager();
     }
 
     @Override
@@ -29,7 +35,7 @@ public class ClienteDAO implements DAO<Cliente>{
 
     @Override
     public void atualizar(Cliente cliente, String[] valores) {
-        // aidna vou fazer
+
     }
 
     @Override

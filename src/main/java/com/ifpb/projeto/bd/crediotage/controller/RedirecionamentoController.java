@@ -2,8 +2,6 @@ package com.ifpb.projeto.bd.crediotage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RedirecionamentoController {
@@ -24,13 +22,13 @@ public class RedirecionamentoController {
     }
 
     @GetMapping("/home")
-    public String redirectCredor(String tipo){
-        if (tipo.equals(tipo)){
+    public String redirectHome(String tipo){
+        if (tipo.equals("Credor")){
             return "home-page-credor";
-        } else {
+        } else if(tipo.equals("Cliente")) {
             return "home-page-cliente";
         }
+        return "redirect:/login";
     }
-
 
 }
