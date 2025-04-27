@@ -46,6 +46,8 @@ public class ClienteDAO implements DAO<Cliente>{
         entityManager.getTransaction().commit();
     }
 
+
+
     public Cliente buscarLogin(String CPF, String password) {
         try {
             TypedQuery<Cliente> query = entityManager.createQuery("SELECT Cliente FROM Cliente Cliente WHERE Cliente.CPF = :CPF AND Cliente.password = :password", Cliente.class);

@@ -31,10 +31,7 @@ public class CadastroService {
         this.credorDAO = credorDAO;
     }
 
-
-
     public void criarUsuario(String name, String email, String cpf, String password, String endereco,LocalDate dataNascimento, String tipo){
-
 
         if(tipo.equals("cliente")){
             Cliente cliente = new Cliente(name,email, cpf, password, endereco, dataNascimento);

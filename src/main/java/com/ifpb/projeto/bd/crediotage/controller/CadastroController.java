@@ -19,9 +19,7 @@ public class CadastroController {
 
     @PostMapping("/save")
     public String redirectPath(@RequestParam String name, @RequestParam String email, @RequestParam String cpf,
-                                @RequestParam String password, @RequestParam String endereco, @RequestParam LocalDate dataNascimento, @RequestParam String tipo){
-        System.out.println(tipo);                   
-        System.out.println(password);         
+                                @RequestParam String password, @RequestParam String endereco, @RequestParam LocalDate dataNascimento, @RequestParam String tipo){        
         service.criarUsuario(name, email, cpf, password, endereco, dataNascimento, tipo);                
         return  "redirect:/login";
     }

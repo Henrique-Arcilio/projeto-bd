@@ -20,15 +20,4 @@ public class RedirecionamentoController {
     public String getMethodName() {
         return "cadastro-page";
     }
-
-    @GetMapping("/home")
-    public String redirectHome(String tipo){
-        if (tipo.equals("Credor")){
-            return "home-page-credor";
-        } else if(tipo.equals("Cliente")) {
-            return "home-page-cliente";
-        }
-        return "redirect:/login";
-    }
-
 }
