@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CredorDAO implements DAO<Credor> {
+
     private EntityManagerFactory emf;
     private EntityManager entityManager;
 

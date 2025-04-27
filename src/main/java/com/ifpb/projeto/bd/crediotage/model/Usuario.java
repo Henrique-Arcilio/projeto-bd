@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @MappedSuperclass
 @DiscriminatorColumn(name="Tipo", discriminatorType= DiscriminatorType.STRING)
-public class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -17,7 +17,16 @@ public class RedirecionamentoController {
     }
 
     @GetMapping("/cadastro")
-    public String getMethodName() {
+    public String showCadastro() {
         return "cadastro-page";
+    }
+
+    @GetMapping("/home-page-cliente")
+    public String showHome() {
+        return "home-page-cliente";
+    }
+    @GetMapping("/home-page-credor")
+    public String showHomeCredor() {
+        return "home-page-credor";
     }
 }

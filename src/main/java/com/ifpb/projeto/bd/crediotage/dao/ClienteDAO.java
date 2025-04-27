@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ClienteDAO implements DAO<Cliente>{
+
     private EntityManagerFactory emf;
     private EntityManager entityManager;
 

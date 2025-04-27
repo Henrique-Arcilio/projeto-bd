@@ -18,7 +18,6 @@ public class LoginController {
     @PostMapping("/autenticar")
     public String validarLogin(@RequestParam String cpf, @RequestParam String password){
 
-        System.out.println(service.validarLogin(cpf, password));
-        return "cu";
+        return service.validarLogin(cpf, password);
     }
 }
