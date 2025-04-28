@@ -19,18 +19,17 @@ import java.util.List;
 @Controller
 public class HomeController {
     private PropostaDAO propostaDAO;
-    private CredorDAO credorDAO;
 
-    public HomeController(PropostaDAO propostaDAO, CredorDAO credorDAO) {
+    public HomeController(PropostaDAO propostaDAO) {
         this.propostaDAO = propostaDAO;
-        this.credorDAO = credorDAO;
     }
 
     @GetMapping("/home")
     public String showHome(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<Proposta> propostas = propostaDAO.listar();
         if(usuario instanceof Cliente) {
-            //model.addAttribute("propostas", propostas);
+            model.addAttribute("propostas", propostas);
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){

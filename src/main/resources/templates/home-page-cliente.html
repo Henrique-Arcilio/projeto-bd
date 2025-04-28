@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>R$ 1000,00</td>
+                                    <td></td>
                                     <td>1.54%</td>
                                     <td>Yasmin Sarinho</td>
                                     <td>21/01/2025</td>
@@ -52,7 +52,7 @@
                     </div>
                 </div> 
             </div>
-            
+
 
             <div class="credores-disponiveis display-flex">
                 <div class="title">
@@ -61,19 +61,23 @@
                 <div class="credores-lista display-flex ">
                     <table class="tabela-credores ">
                         <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Juros</th>
-
-                            </tr>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor Máximo</th>
+                            <th>Juros</th>
+                            <th>Parcela Máxima</th>
+                            <th>Explorar</th>
+                        </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1.54%</td>
-                                <td>Yasmin Sarinho</td>
+                        <tbody th:each="proposta : ${propostas}">
+                        <tr>
+                            <td th:text="${proposta.credor.nome}"></td>
+                            <td th:text="${proposta.valorMaximo}"></td>
+                            <td th:text="${proposta.juros}">
+                            <td th:text="${proposta.parcelasMaxima}"></td>
+                            <td><a th:href="@{'/explorar/' + ${proposta.id}}">🔎</a></td>
 
-                            </tr>
-                            
+                        </tr>
                         </tbody>
                     </table>
                 </div>
