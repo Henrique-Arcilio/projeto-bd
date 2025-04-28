@@ -1,5 +1,9 @@
 package com.ifpb.projeto.bd.crediotage.controller;
 
+import com.ifpb.projeto.bd.crediotage.model.Cliente;
+import com.ifpb.projeto.bd.crediotage.model.Credor;
+import com.ifpb.projeto.bd.crediotage.model.Usuario;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,14 +23,5 @@ public class RedirecionamentoController {
     @GetMapping("/cadastro")
     public String showCadastro() {
         return "cadastro-page";
-    }
-
-    @GetMapping("/home-page-cliente")
-    public String showHome() {
-        return "home-page-cliente";
-    }
-    @GetMapping("/home-page-credor")
-    public String showHomeCredor() {
-        return "home-page-credor";
     }
 }

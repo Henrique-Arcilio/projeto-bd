@@ -2,11 +2,7 @@ package com.ifpb.projeto.bd.crediotage.service;
 
 import com.ifpb.projeto.bd.crediotage.dao.ClienteDAO;
 import com.ifpb.projeto.bd.crediotage.dao.CredorDAO;
-import com.ifpb.projeto.bd.crediotage.model.Cliente;
-import com.ifpb.projeto.bd.crediotage.model.Credor;
 import com.ifpb.projeto.bd.crediotage.model.Usuario;
-
-import jakarta.persistence.NoResultException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +16,7 @@ public class LoginService {
         this.clienteDAO = clienteDAO;
     }
 
-    public String validarLogin(String cpf, String password) {
+    public Usuario validarLogin(String cpf, String password) {
         Usuario usuario;
 
         usuario = clienteDAO.buscarLogin(cpf, password);
@@ -28,13 +24,7 @@ public class LoginService {
         if (usuario == null) {
             usuario = credorDAO.buscarLogin(cpf, password);
         }
+        return usuario;
 
-        if(usuario instanceof Cliente) {
-            return "redirect:/home-page-cliente";
-        }else if (usuario instanceof Credor){
-            return "redirect:/home-page-credor";
-        }else{
-            return "redirect:/login";
-        }
     }
 }
