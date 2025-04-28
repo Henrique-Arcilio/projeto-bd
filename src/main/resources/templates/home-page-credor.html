@@ -20,6 +20,25 @@
             <div class="title">
                 <h1>Crediotage</h1>
             </div>
+
+            <div class="criar-emprestimo">
+                <form action="home/criar-proposta" method="post">
+                    <div class="row">
+                        <label for="valorMaximo">Valor Maximo</label>
+                        <input id="valorMaximo" name="valorMaximo">
+                    </div>
+                    <div class="row">
+                        <label for="juros">Juros</label>
+                        <input id="juros" name="juros">
+                    </div>
+                    <div class="row">
+                        <label for="parcelaMax">Parcela Maxima</label>
+                        <input id="parcelaMax" name="parcelaMax">
+                    </div>
+                    <button>criar</button>
+                </form>
+            </div>
+
             <div class="solicitacoes-de-emprestimo display-flex">
                 <div class="solicitacoes display-flex">
                     <h3>Solicitações de Emprestimo</h3>

@@ -1,9 +1,6 @@
 package com.ifpb.projeto.bd.crediotage.model;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,8 +16,12 @@ import java.util.List;
 @DiscriminatorValue("Credor")
 
 public class Credor extends Usuario{
+
     @OneToMany(mappedBy = "credor")
     private List<Emprestimo> emprestimo;
+
+    @OneToOne(mappedBy = "credor")
+    private Proposta proposta;
 
     public Credor(String name, String email, String cpf, String password, String endereco, LocalDate dataNascimento){
        super(name, email, cpf, password, endereco, dataNascimento);
