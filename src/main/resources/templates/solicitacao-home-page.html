@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitando</title>
+</head>
+<body>
+    <form action="criar-solicitacao" method="Post">
+        <label for="valor">Valor Solicitado</label>
+        <input id="valor" name="valor">
+        <label for="parcelas"></label>
+        <input name="parcelas" id="parcelas"  type="number" min=1  th:max="${proposta.parcelasMaxima}">
+        <button>solicitar emprestimo</button>
+    </form>
+</body>
+
+</html>

@@ -1,49 +1,45 @@
 package com.ifpb.projeto.bd.crediotage.dao;
+
 import com.ifpb.projeto.bd.crediotage.model.Proposta;
+import com.ifpb.projeto.bd.crediotage.model.Solicitacao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
-public class PropostaDAO implements DAO<Proposta> {
-
+public class SolicitacaoDAO implements DAO<Solicitacao> {
     private EntityManagerFactory emf;
     private EntityManager entityManager;
 
-    public PropostaDAO(EntityManagerFactory emf) {
+    public SolicitacaoDAO(EntityManagerFactory emf) {
         this.emf = emf;
         this.entityManager = emf.createEntityManager();
     }
 
     @Override
-    public List<Proposta> listar() {
-        TypedQuery<Proposta> query = entityManager.createQuery("SELECT proposta FROM Proposta proposta", Proposta.class);
+    public List<Solicitacao> listar() {
+        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao", Solicitacao.class);
         return query.getResultList();
     }
 
-    public Proposta buscarPorId(UUID id) {
-        return entityManager.find(Proposta.class, id);
-    }
-
     @Override
-    public void salvar(Proposta proposta) {
+    public void salvar(Solicitacao solicitacao) {
         entityManager.getTransaction().begin();
-        entityManager.persist(proposta);
+        entityManager.persist(solicitacao);
         entityManager.getTransaction().commit();
     }
 
     @Override
-    public void atualizar(Proposta proposta, String[] valores) {
+    public void atualizar(Solicitacao solicitacao, String[] valores) {
 
     }
 
     @Override
-    public void deletar(Proposta proposta) {
+    public void deletar(Solicitacao solicitacao) {
 
     }
-
 }

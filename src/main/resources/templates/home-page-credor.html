@@ -45,19 +45,19 @@
                 </div>
                 <div class="solicitacoes-info display-flex">
                     <table class="tabela-style tabela-solicitacoes">
-                        <thead>
+                        <thead >
                             <tr>
                                 <th>Nome</th>
                                 <th>Valor Solicitado</th>
-                                <th>Data proposta</th>
+                                <th>Parcelas</th>
                                 <th>Selecionar</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody th:each="solicitacao : ${solicitacoes}">
                             <tr>
-                                <td>Lucas</td>
-                                <td>R$2000</td>
-                                <td>27/08/2025</td>
+                                <td th:text="${solicitacao.cliente.nome}"></td>
+                                <td th:text="${solicitacao.valorSolicitado}"></td>
+                                <td th:text="${solicitacao.parcelas}"></td>
                                 <td>
                                     <input type="checkbox">
                                 </td>
@@ -99,4 +99,5 @@
         </div>
 
     </div>
-    </html>
+</body>
+</html>

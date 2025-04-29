@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,7 +27,8 @@ public class Proposta {
     @OneToOne
     @JoinColumn(name = "fk_credor")
     private Credor credor;
-
+    @OneToMany(mappedBy = "proposta")
+    private List<Solicitacao> solicitacoes;
     public Proposta(BigDecimal valorMaximo, BigDecimal juros, int parcelasMaxima, Credor credor) {
         this.valorMaximo = valorMaximo;
         this.juros = juros;
