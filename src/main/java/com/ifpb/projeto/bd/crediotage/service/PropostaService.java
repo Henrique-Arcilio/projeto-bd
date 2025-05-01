@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class PropostaService {
@@ -22,5 +23,8 @@ public class PropostaService {
         Credor credor = (Credor) session.getAttribute("usuario");
         Proposta posposta = new Proposta(valorMaximo, juros, parcelaMax, credor);
         propostaDAO.salvar(posposta);
+    }
+    public List<Proposta> listar(){
+        return propostaDAO.listar();
     }
 }

@@ -1,18 +1,14 @@
 package com.ifpb.projeto.bd.crediotage.service;
 
-import com.ifpb.projeto.bd.crediotage.dao.ClienteDAO;
-import com.ifpb.projeto.bd.crediotage.dao.CredorDAO;
 import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
 import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
-import com.ifpb.projeto.bd.crediotage.model.Credor;
 import com.ifpb.projeto.bd.crediotage.model.Proposta;
 import com.ifpb.projeto.bd.crediotage.model.Solicitacao;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,5 +28,12 @@ public class SolicitacaoService {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         Solicitacao solicitacao = new Solicitacao(valor, parcelas, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
+    }
+    public List<Solicitacao> buscarSolicitacaoPorCliente() {
+        Cliente cliente = (Cliente) session.getAttribute("usuario");
+        return solicitacaoDAO.buscarPorCliente(cliente);
+    }
+    public List<Solicitacao> listar(){
+        return solicitacaoDAO.listar();
     }
 }

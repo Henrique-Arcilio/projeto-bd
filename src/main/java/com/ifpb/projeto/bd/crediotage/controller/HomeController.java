@@ -1,43 +1,42 @@
 package com.ifpb.projeto.bd.crediotage.controller;
 
-import com.ifpb.projeto.bd.crediotage.dao.ClienteDAO;
-import com.ifpb.projeto.bd.crediotage.dao.CredorDAO;
-import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
-import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.*;
+import com.ifpb.projeto.bd.crediotage.service.PropostaService;
+import com.ifpb.projeto.bd.crediotage.service.SolicitacaoService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
 public class HomeController {
-    private PropostaDAO propostaDAO;
-    private SolicitacaoDAO solicitacaoDAO;
+    private PropostaService propostaService;
+    private SolicitacaoService solicitacaoService;
 
-    public HomeController(PropostaDAO propostaDAO, SolicitacaoDAO solicitacaoDAO) {
-        this.propostaDAO = propostaDAO;
-        this.solicitacaoDAO = solicitacaoDAO;
+    public HomeController(PropostaService propostaService, SolicitacaoService solicitacaoService) {
+        this.propostaService = propostaService;
+        this.solicitacaoService = solicitacaoService;
     }
 
     @GetMapping("/home")
     public String showHome(HttpSession session, Model model) {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        List<Proposta> propostas = propostaDAO.listar();
-        List<Solicitacao> solicitacoes = solicitacaoDAO.listar();
 
         if(usuario instanceof Cliente) {
+            List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarSolicitacaoPorCliente();
+            List<Proposta> propostas = propostaService.listar();
             model.addAttribute("propostas", propostas);
+            model.addAttribute("solicitacoes", solicitacoesDoCliente);
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){
-            model.addAttribute("solicitacoes", solicitacoes);
+            List<Solicitacao> todasSolicitacoes = solicitacaoService.listar();
+            model.addAttribute("solicitacoes", todasSolicitacoes);
             return "home-page-credor";
+
         }else{
             return "redirect:/login";
         }
