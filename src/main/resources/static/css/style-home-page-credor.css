@@ -11,6 +11,12 @@
     --preto-escuro: #000000;
 }
 
+body{
+    background-color: var(--azul-claro);
+    padding-bottom: 10rem;
+    padding-top: 2rem;
+}
+
 .display-flex{
     display: flex;
 }
@@ -31,7 +37,13 @@
     gap: 2rem;
 }
 
-.solicitacoes-de-emprestimo, .solicitacoes-aprovadas{
+body .criar-emprestimo {
+    height: 30vh;
+
+}
+
+
+.solicitacoes-de-emprestimo, .solicitacoes-aprovadas, .criar-emprestimo{
     background-color: var(--branco);
     flex-direction: column;
     align-items: center;
@@ -41,7 +53,7 @@
     border-radius: 1rem;
 
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    height: 40vh;
+    height: auto;
 }
 
 .solicitacoes-de-emprestimo {
@@ -56,6 +68,59 @@
     align-self: auto;
     display: in-line;
     gap: 10px;
+}
+
+input {
+    max-width: 250px;
+    height: 44px;
+  
+    background-color: #05060f11;
+  
+    border-radius: .5rem;
+    padding: 0 1rem;
+    border: 2px solid transparent;
+    
+    font-size: 1rem;
+    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+label {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    font-weight: bold;
+    color: var(--preto-escuro);
+    transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+  }
+
+input:hover, input:focus, input-group:hover input {
+    outline: none;
+    border-color: var(--preto-claro);
+}
+
+input-group:hover label, input:focus {
+    color: #05060fc2;
+}
+
+button {
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    padding: 1em 1.8em;
+    margin-top: 1.5rem;
+
+    color: var(--branco);
+    background: var(--azul);
+    font-weight: bold;
+
+    text-align: center;
+
+    transition: 0.2s background;
+}
+
+button:hover {
+    background-color: var(--azul-escuro);
+    cursor: pointer;
 }
 
 
