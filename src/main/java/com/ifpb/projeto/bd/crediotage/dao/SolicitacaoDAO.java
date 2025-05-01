@@ -8,6 +8,7 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class SolicitacaoDAO implements DAO<Solicitacao> {
@@ -25,11 +26,17 @@ public class SolicitacaoDAO implements DAO<Solicitacao> {
         return query.getResultList();
     }
 
+    @Override
+    public Solicitacao buscarPorId(UUID id) {
+        return entityManager.find(Solicitacao.class, id);
+    }
+
     public List<Solicitacao> buscarPorCliente(Cliente cliente) {
         TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao from Solicitacao solicitacao where solicitacao.cliente = :fk_cliente", Solicitacao.class);
         query.setParameter("fk_cliente", cliente);
         return query.getResultList();
     }
+
 
     @Override
     public void salvar(Solicitacao solicitacao) {

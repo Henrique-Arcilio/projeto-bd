@@ -7,6 +7,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +33,11 @@ public class CredorDAO implements DAO<Credor> {
         entityManager.getTransaction().begin();
         entityManager.persist(credor);
         entityManager.getTransaction().commit();
+    }
+
+    @Override
+    public Credor buscarPorId(UUID id) {
+       return entityManager.find(Credor.class, id);
     }
 
     @Override

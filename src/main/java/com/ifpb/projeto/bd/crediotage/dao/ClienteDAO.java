@@ -7,12 +7,12 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ClienteDAO implements DAO<Cliente>{
-
     private EntityManagerFactory emf;
     private EntityManager entityManager;
 
@@ -32,6 +32,11 @@ public class ClienteDAO implements DAO<Cliente>{
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
         entityManager.getTransaction().commit();
+    }
+
+    @Override
+    public Cliente buscarPorId(UUID id) {
+        return entityManager.find(Cliente.class, id);
     }
 
     @Override
