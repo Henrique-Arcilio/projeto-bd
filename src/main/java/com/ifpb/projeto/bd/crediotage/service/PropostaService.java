@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PropostaService {
@@ -24,7 +25,12 @@ public class PropostaService {
         Proposta posposta = new Proposta(valorMaximo, juros, parcelaMax, credor);
         propostaDAO.salvar(posposta);
     }
+    public Proposta buscarPorId(UUID id) {
+        return propostaDAO.buscarPorId(id);
+    }
+
     public List<Proposta> listar(){
         return propostaDAO.listar();
     }
+
 }
