@@ -5,7 +5,9 @@ import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import com.ifpb.projeto.bd.crediotage.model.Proposta;
 import com.ifpb.projeto.bd.crediotage.model.Solicitacao;
+import com.ifpb.projeto.bd.crediotage.model.Status;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.PushBuilder;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,11 +31,32 @@ public class SolicitacaoService {
         Solicitacao solicitacao = new Solicitacao(valor, parcelas, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
     }
+
     public List<Solicitacao> buscarSolicitacaoPorCliente() {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         return solicitacaoDAO.buscarPorCliente(cliente);
     }
+
     public List<Solicitacao> listar(){
         return solicitacaoDAO.listar();
     }
+
+    public void atualizarSolicitacao(List<UUID> idPropostas, boolean aprovado){
+        Status status = Status.NEGADO;
+        if(aprovado){
+            status = Status.APROVADO;
+        }
+        for(UUID id: idPropostas){
+            solicitacaoDAO.atualizarStatus(id, status);
+        }
+    }
+
+    public List<Solicitacao> listarSolicitacoesAprovadas(){
+        return solicitacaoDAO.listarPorStatus(Status.APROVADO);
+    }
+
+    public List<Solicitacao> listarSolicitacoesPendentes(){
+        return solicitacaoDAO.listarPorStatus(Status.PENDENTE);
+    }
+
 }

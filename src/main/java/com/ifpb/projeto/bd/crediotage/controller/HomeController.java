@@ -33,8 +33,12 @@ public class HomeController {
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){
-            List<Solicitacao> todasSolicitacoes = solicitacaoService.listar();
+            List<Solicitacao> todasSolicitacoes = solicitacaoService.listarSolicitacoesPendentes();
             model.addAttribute("solicitacoes", todasSolicitacoes);
+
+            List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesAprovadas();
+            model.addAttribute("solicitacoesAprovadas", solicitacoesAprovadas);
+
             return "home-page-credor";
 
         }else{

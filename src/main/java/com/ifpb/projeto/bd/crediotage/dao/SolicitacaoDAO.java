@@ -2,6 +2,7 @@ package com.ifpb.projeto.bd.crediotage.dao;
 
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import com.ifpb.projeto.bd.crediotage.model.Solicitacao;
+import com.ifpb.projeto.bd.crediotage.model.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -23,6 +24,12 @@ public class SolicitacaoDAO implements DAO<Solicitacao> {
     @Override
     public List<Solicitacao> listar() {
         TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao", Solicitacao.class);
+        return query.getResultList();
+    }
+
+    public List<Solicitacao> listarPorStatus(Status status) {
+        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao from Solicitacao solicitacao where solicitacao.status = :status", Solicitacao.class);
+        query.setParameter("status", status);
         return query.getResultList();
     }
 
@@ -48,6 +55,13 @@ public class SolicitacaoDAO implements DAO<Solicitacao> {
     @Override
     public void atualizar(Solicitacao solicitacao, String[] valores) {
 
+    }
+
+    public void atualizarStatus(UUID idSolicitacao, Status status) {
+        entityManager.getTransaction().begin();
+        Solicitacao solicitacao = entityManager.find(Solicitacao.class, idSolicitacao);
+        solicitacao.setStatus(status);
+        entityManager.getTransaction().commit();
     }
 
     @Override

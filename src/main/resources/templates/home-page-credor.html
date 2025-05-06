@@ -44,33 +44,41 @@
                 <div class="solicitacoes display-flex">
                     <h3>Solicitações de Emprestimo</h3>
                 </div>
+
                 <div class="solicitacoes-info display-flex">
-                    <table class="tabela-style tabela-solicitacoes">
-                        <thead >
-                            <tr>
-                                <th>Nome</th>
-                                <th>Valor Solicitado</th>
-                                <th>Parcelas</th>
-                                <th>Selecionar</th>
-                            </tr>
-                        </thead>
-                        <tbody th:each="solicitacao : ${solicitacoes}">
-                            <tr>
-                                <td th:text="${solicitacao.cliente.nome}"></td>
-                                <td th:text="${solicitacao.valorSolicitado}"></td>
-                                <td th:text="${solicitacao.parcelas}"></td>
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                            </tr>
-                        </tbody>         
-                    </table>
+                    <form action="home/gerenciar-solicitacao" method="POST">
+                        <table class="tabela-style tabela-solicitacoes">
+                            <thead >
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Valor Solicitado</th>
+                                    <th>Parcelas</th>
+                                    <th>Selecionar</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody th:each="solicitacao : ${solicitacoes}">
+                                <tr>
+                                    <td th:text="${solicitacao.cliente.nome}"></td>
+                                    <td th:text="${solicitacao.valorSolicitado}"></td>
+                                    <td th:text="${solicitacao.parcelas}"></td>
+
+                                    <td>
+                                        <input type="checkbox" name="idSolicitacao" th:value="${solicitacao.id}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                            <div class="botoes-aceitar-negar display-flex">
+                                <button name="aprovado" value="true">Aceitar</button>
+                                <button name="aprovado" value="false">Negar</button>
+                            </div>
+                    </form>
                 </div>
 
-                <div class="botoes-aceitar-negar display-flex">
-                    <button >Aceitar</button>
-                    <button>Negar</button>
-                </div>
+
+
             </div>
 
             <div class="solicitacoes-aprovadas display-flex">
@@ -83,16 +91,14 @@
                         <tr>
                             <th>Nome</th>
                             <th>Valor Solicitado</th>
-                            <th>Data proposta</th>
-                            <th>Status</th>
+                            <th>Parcelas</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody th:each="solicitacao : ${solicitacoesAprovadas}">
                         <tr>
-                            <td>Lucas</td>
-                            <td>R$2000</td>
-                            <td>27/08/2025</td>
-                            <td>Aprovado</td>
+                            <td th:text="${solicitacao.cliente.nome}"></td>
+                            <td th:text="${solicitacao.valorSolicitado}"></td>
+                            <td th:text="${solicitacao.parcelas}"></td>
                         </tr>
                     </tbody>         
                 </table>

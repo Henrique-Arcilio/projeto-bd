@@ -42,7 +42,7 @@ public class CredorDAO implements DAO<Credor> {
 
     @Override
     public void atualizar(Credor credor, String[] valores) {
-        // aidna vou fazer
+
     }
 
     @Override

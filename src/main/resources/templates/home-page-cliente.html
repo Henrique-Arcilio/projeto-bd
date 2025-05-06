@@ -99,6 +99,7 @@
                         <tbody th:each="solicitacao : ${solicitacoes}">
                             <tr>
                                 <td th:text="${solicitacao.proposta.credor.nome}"></td>
+                                <td th:text="${solicitacao.status}"></td>
                             </tr>
                             
                         </tbody>

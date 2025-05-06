@@ -25,6 +25,7 @@ public class PropostaService {
         Proposta posposta = new Proposta(valorMaximo, juros, parcelaMax, credor);
         propostaDAO.salvar(posposta);
     }
+
     public Proposta buscarPorId(UUID id) {
         return propostaDAO.buscarPorId(id);
     }
@@ -32,5 +33,6 @@ public class PropostaService {
     public List<Proposta> listar(){
         return propostaDAO.listar();
     }
+
 
 }

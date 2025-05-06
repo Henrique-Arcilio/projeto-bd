@@ -18,6 +18,9 @@ public class Solicitacao {
     private UUID id;
     private BigDecimal valorSolicitado;
     private int parcelas;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @ManyToOne
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
@@ -30,5 +33,6 @@ public class Solicitacao {
         this.parcelas = parcelas;
         this.cliente = cliente;
         this.proposta = proposta;
+        this.status = Status.PENDENTE;
     }
 }
