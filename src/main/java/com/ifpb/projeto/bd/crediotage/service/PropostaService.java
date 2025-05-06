@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,9 +21,9 @@ public class PropostaService {
         this.propostaDAO = propostaDAO;
     }
 
-    public void criarProposta(BigDecimal valorMaximo, BigDecimal juros, int parcelaMax) {
+    public void criarProposta(BigDecimal valorMaximo, BigDecimal juros, LocalDate dataLimite) {
         Credor credor = (Credor) session.getAttribute("usuario");
-        Proposta posposta = new Proposta(valorMaximo, juros, parcelaMax, credor);
+        Proposta posposta = new Proposta(valorMaximo, juros, dataLimite, credor);
         propostaDAO.salvar(posposta);
     }
 

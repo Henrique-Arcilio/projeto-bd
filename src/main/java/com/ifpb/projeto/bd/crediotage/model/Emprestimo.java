@@ -2,6 +2,7 @@ package com.ifpb.projeto.bd.crediotage.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Emprestimo {
 
     @Id
@@ -25,9 +27,6 @@ public class Emprestimo {
     private BigDecimal valor;
     @Column(nullable = false)
     private BigDecimal juros;
-    @Column(nullable = false)
-    private int parcelas;
-
     @OneToOne
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
@@ -36,4 +35,12 @@ public class Emprestimo {
     @JoinColumn(name = "fk_credor")
     private Credor credor;
 
+    public Emprestimo(LocalDate dataPrazoFinal, BigDecimal valor, BigDecimal juros, Cliente cliente, Credor credor) {
+        this.dataSolicitacao = LocalDate.now();
+        this.dataPrazoFinal = dataPrazoFinal;
+        this.valor = valor;
+        this.juros = juros;
+        this.cliente = cliente;
+        this.credor = credor;
+    }
 }

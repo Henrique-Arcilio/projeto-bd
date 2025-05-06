@@ -65,7 +65,7 @@
                             <th>Nome</th>
                             <th>Valor Máximo</th>
                             <th>Juros</th>
-                            <th>Parcela Máxima</th>
+                            <th>Data Limite</th>
                             <th>Explorar</th>
                         </tr>
                         </thead>
@@ -74,7 +74,7 @@
                             <td th:text="${proposta.credor.nome}"></td>
                             <td th:text="${proposta.valorMaximo}"></td>
                             <td th:text="${proposta.juros}">
-                            <td th:text="${proposta.parcelasMaxima}"></td>
+                            <td th:text="${proposta.dataLimite}"></td>
                             <td><a th:href="@{'/explorar/' + ${proposta.id} + '/'}">🔎</a></td>
 
                         </tr>

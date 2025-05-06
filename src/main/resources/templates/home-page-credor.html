@@ -33,8 +33,8 @@
                         <input id="juros" name="juros">
                     </div>
                     <div class="row">
-                        <label for="parcelaMax">Parcela Maxima</label>
-                        <input id="parcelaMax" name="parcelaMax">
+                        <label for="dataLimite">Dar prazo limite</label>
+                        <input type="date" id="dataLimite" name="dataLimite">
                     </div>
                     <button>criar</button>
                 </form>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Valor Solicitado</th>
-                                    <th>Parcelas</th>
+                                    <th>Data de Pagamento</th>
                                     <th>Selecionar</th>
                                 </tr>
                             </thead>
@@ -62,10 +62,10 @@
                                 <tr>
                                     <td th:text="${solicitacao.cliente.nome}"></td>
                                     <td th:text="${solicitacao.valorSolicitado}"></td>
-                                    <td th:text="${solicitacao.parcelas}"></td>
+                                    <td th:text="${solicitacao.dataDePagamento}"></td>
 
                                     <td>
-                                        <input type="checkbox" name="idSolicitacao" th:value="${solicitacao.id}">
+                                        <input type="checkbox" name="idSolicitacoes" th:value="${solicitacao.id}">
                                     </td>
                                 </tr>
                             </tbody>
@@ -91,14 +91,14 @@
                         <tr>
                             <th>Nome</th>
                             <th>Valor Solicitado</th>
-                            <th>Parcelas</th>
+                            <th>Data Proposta</th>
                         </tr>
                     </thead>
                     <tbody th:each="solicitacao : ${solicitacoesAprovadas}">
                         <tr>
                             <td th:text="${solicitacao.cliente.nome}"></td>
                             <td th:text="${solicitacao.valorSolicitado}"></td>
-                            <td th:text="${solicitacao.parcelas}"></td>
+                            <td th:text="${solicitacao.dataDePagamento}"></td>
                         </tr>
                     </tbody>         
                 </table>

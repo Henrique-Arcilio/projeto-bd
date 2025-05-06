@@ -57,9 +57,8 @@ public class SolicitacaoDAO implements DAO<Solicitacao> {
 
     }
 
-    public void atualizarStatus(UUID idSolicitacao, Status status) {
+    public void atualizarStatus(Solicitacao solicitacao, Status status) {
         entityManager.getTransaction().begin();
-        Solicitacao solicitacao = entityManager.find(Solicitacao.class, idSolicitacao);
         solicitacao.setStatus(status);
         entityManager.getTransaction().commit();
     }

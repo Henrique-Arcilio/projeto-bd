@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,15 +30,15 @@ public class SolicitacaoController {
     }
 
     @PostMapping("/explorar/{id}/criar-solicitacao")
-    public String criarSolicitacao(@RequestParam BigDecimal valor, @RequestParam int parcelas,
+    public String criarSolicitacao(@RequestParam BigDecimal valor, @RequestParam LocalDate dataDePagamento,
                                    @PathVariable UUID id) {
-        service.criarSolicitacao(valor, parcelas, id);
+        service.criarSolicitacao(valor, dataDePagamento, id);
         return "redirect:/home";
     }
 
     @PostMapping("/home/gerenciar-solicitacao")
-    public String genrenciarSolicitacao(@RequestParam List<UUID> idSolicitacao, boolean aprovado){
-        service.atualizarSolicitacao(idSolicitacao, aprovado);
+    public String genrenciarSolicitacao(@RequestParam List<UUID> idSolicitacoes, @RequestParam boolean aprovado){
+        service.atualizarSolicitacao(idSolicitacoes, aprovado);
         return "redirect:/home";
     }
 

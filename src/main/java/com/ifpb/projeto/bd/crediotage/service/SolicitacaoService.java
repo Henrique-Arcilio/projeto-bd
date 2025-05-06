@@ -1,15 +1,15 @@
 package com.ifpb.projeto.bd.crediotage.service;
 
+import com.ifpb.projeto.bd.crediotage.dao.EmprestimoDAO;
 import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
 import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
-import com.ifpb.projeto.bd.crediotage.model.Cliente;
-import com.ifpb.projeto.bd.crediotage.model.Proposta;
-import com.ifpb.projeto.bd.crediotage.model.Solicitacao;
-import com.ifpb.projeto.bd.crediotage.model.Status;
+import com.ifpb.projeto.bd.crediotage.model.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.PushBuilder;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,18 +17,20 @@ import java.util.UUID;
 public class SolicitacaoService {
     private SolicitacaoDAO solicitacaoDAO;
     private PropostaDAO propostaDAO;
+    private EmprestimoDAO emprestimoDAO;
     private HttpSession session;
 
-    public SolicitacaoService(SolicitacaoDAO solicitacaoDAO, PropostaDAO propostaDAO, HttpSession session) {
+    public SolicitacaoService(SolicitacaoDAO solicitacaoDAO, PropostaDAO propostaDAO, EmprestimoDAO emprestimoDAO, HttpSession session) {
         this.solicitacaoDAO = solicitacaoDAO;
         this.propostaDAO = propostaDAO;
+        this.emprestimoDAO = emprestimoDAO;
         this.session = session;
     }
 
-    public void criarSolicitacao(BigDecimal valor, int parcelas, UUID idProposta) {
+    public void criarSolicitacao(BigDecimal valor, LocalDate dataDePagamento, UUID idProposta) {
         Proposta proposta = propostaDAO.buscarPorId(idProposta);
         Cliente cliente = (Cliente) session.getAttribute("usuario");
-        Solicitacao solicitacao = new Solicitacao(valor, parcelas, cliente, proposta);
+        Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
     }
 
@@ -41,14 +43,24 @@ public class SolicitacaoService {
         return solicitacaoDAO.listar();
     }
 
-    public void atualizarSolicitacao(List<UUID> idPropostas, boolean aprovado){
+    public void atualizarSolicitacao(List<UUID> idSolicitacoes, boolean aprovado){
         Status status = Status.NEGADO;
         if(aprovado){
             status = Status.APROVADO;
         }
-        for(UUID id: idPropostas){
-            solicitacaoDAO.atualizarStatus(id, status);
+        for(UUID id : idSolicitacoes){
+            Solicitacao solicitacao = solicitacaoDAO.buscarPorId(id);
+            BigDecimal valor = solicitacao.getValorSolicitado();
+            BigDecimal juros = solicitacao.getProposta().getJuros();
+            LocalDate dataDePagamento = solicitacao.getDataDePagamento();
+            Cliente cliente = solicitacao.getCliente();
+            Credor credor = solicitacao.getProposta().getCredor();
+
+            Emprestimo emprestimo = new Emprestimo(dataDePagamento, valor, juros, cliente, credor);
+            solicitacaoDAO.atualizarStatus(solicitacao, status);
+            emprestimoDAO.salvar(emprestimo);
         }
+
     }
 
     public List<Solicitacao> listarSolicitacoesAprovadas(){

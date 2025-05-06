@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Controller
 public class PropostaController {
@@ -17,8 +18,8 @@ public class PropostaController {
 
     @PostMapping("/home/criar-proposta")
     public String criarProposta( @RequestParam BigDecimal valorMaximo,
-                                 @RequestParam BigDecimal juros, @RequestParam int parcelaMax) {
-        service.criarProposta(valorMaximo, juros, parcelaMax);
+                                 @RequestParam BigDecimal juros, @RequestParam LocalDate dataLimite) {
+        service.criarProposta(valorMaximo, juros, dataLimite);
         return "redirect:/home";
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +18,7 @@ public class Solicitacao {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private BigDecimal valorSolicitado;
-    private int parcelas;
+    private LocalDate dataDePagamento;
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -28,9 +29,9 @@ public class Solicitacao {
     @JoinColumn(name = "fk_proposta")
     private Proposta proposta;
 
-    public Solicitacao(BigDecimal valorSolicitado, int parcelas, Cliente cliente, Proposta proposta) {
+    public Solicitacao(BigDecimal valorSolicitado, LocalDate dataDePagamento, Cliente cliente, Proposta proposta) {
         this.valorSolicitado = valorSolicitado;
-        this.parcelas = parcelas;
+        this.dataDePagamento = dataDePagamento;
         this.cliente = cliente;
         this.proposta = proposta;
         this.status = Status.PENDENTE;
