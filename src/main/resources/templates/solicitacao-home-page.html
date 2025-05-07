@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Solicitando</title>
+    <link rel="shortcut icon" href="/image/icon.jpg" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/style-solicitacao.css">
+
+    <title>Crediotage - Solicitando</title>
 </head>
 <body>
-    <form action="criar-solicitacao" method="Post">
-        <label for="valor">Valor Solicitado</label>
-        <input id="valor" name="valor">
-        <label for="dataDePagamento"></label>
-        <input id ="dataDePagamento" name="dataDePagamento" type="date">
-        <button>solicitar emprestimo</button>
-    </form>
+    <div class="solicitacao-page display-flex">
+        <div class="solicitacao-area display-flex">
+            <h2>Solicitar Emprestimo</h2>
+            <form action="criar-solicitacao" method="Post">
+                <label for="valor">Valor Solicitado</label>
+                <input id="valor" name="valor">
+                <label for="dataDePagamento">Data de Pagamento</label>
+                <input id ="dataDePagamento" name="dataDePagamento" type="date">
+                <button>Solicitar emprestimo</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
