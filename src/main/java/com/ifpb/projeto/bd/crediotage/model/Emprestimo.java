@@ -30,7 +30,6 @@ public class Emprestimo {
     @OneToOne
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
-
     @ManyToOne
     @JoinColumn(name = "fk_credor")
     private Credor credor;

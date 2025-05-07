@@ -11,5 +11,4 @@ public class CrediotageApplication {
 	public static void main(String[] args){
 		SpringApplication.run(CrediotageApplication.class, args);
 	}
-
 }

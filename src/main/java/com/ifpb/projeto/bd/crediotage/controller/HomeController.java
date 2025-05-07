@@ -1,6 +1,7 @@
 package com.ifpb.projeto.bd.crediotage.controller;
 
 import com.ifpb.projeto.bd.crediotage.model.*;
+import com.ifpb.projeto.bd.crediotage.service.EmprestimoService;
 import com.ifpb.projeto.bd.crediotage.service.PropostaService;
 import com.ifpb.projeto.bd.crediotage.service.SolicitacaoService;
 import jakarta.servlet.http.HttpSession;
@@ -8,16 +9,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class HomeController {
     private PropostaService propostaService;
     private SolicitacaoService solicitacaoService;
+    private EmprestimoService emprestimoService;
 
-    public HomeController(PropostaService propostaService, SolicitacaoService solicitacaoService) {
+    public HomeController(PropostaService propostaService, SolicitacaoService solicitacaoService, EmprestimoService emprestimoService) {
         this.propostaService = propostaService;
         this.solicitacaoService = solicitacaoService;
+        this.emprestimoService = emprestimoService;
     }
 
     @GetMapping("/home")
@@ -28,8 +34,10 @@ public class HomeController {
         if(usuario instanceof Cliente) {
             List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarSolicitacaoPorCliente();
             List<Proposta> propostas = propostaService.listar();
+            Emprestimo emprestimo = emprestimoService.buscarPorCliente((Cliente) usuario);
             model.addAttribute("propostas", propostas);
             model.addAttribute("solicitacoes", solicitacoesDoCliente);
+            model.addAttribute("emprestimo", emprestimo);
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){
@@ -44,6 +52,12 @@ public class HomeController {
         }else{
             return "redirect:/login";
         }
+    }
+
+    @PostMapping("/home/pagar")
+    public String pagarEmprestimo(@RequestParam UUID idEmprestimo){
+        emprestimoService.pagarEmprestimo(idEmprestimo);
+        return "redirect:/home";
     }
     @PostMapping("/sair")
     public String sair(HttpSession session) {

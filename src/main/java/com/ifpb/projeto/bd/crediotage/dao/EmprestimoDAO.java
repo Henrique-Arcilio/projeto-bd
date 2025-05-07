@@ -1,8 +1,11 @@
 package com.ifpb.projeto.bd.crediotage.dao;
 
+import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import com.ifpb.projeto.bd.crediotage.model.Emprestimo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,8 +28,20 @@ public class EmprestimoDAO implements DAO<Emprestimo>{
 
     @Override
     public Emprestimo buscarPorId(UUID id) {
-        return null;
+        return entityManager.find(Emprestimo.class, id);
     }
+
+    public Emprestimo buscarPorCliente(Cliente cliente){
+        TypedQuery<Emprestimo> query = entityManager.createQuery("SELECT Emprestimo FROM Emprestimo Emprestimo where Emprestimo.cliente = :fk_cliente", Emprestimo.class);
+        query.setParameter("fk_cliente", cliente);
+        try{
+            return query.getSingleResult();
+        }
+        catch (Exception e ){
+            return null;
+        }
+    }
+
 
     @Override
     public void salvar(Emprestimo emprestimo) {
@@ -43,5 +58,11 @@ public class EmprestimoDAO implements DAO<Emprestimo>{
     @Override
     public void deletar(Emprestimo emprestimo) {
 
+    }
+    public void deletarPorId(UUID idEmprestimo){
+        entityManager.getTransaction().begin();
+        Emprestimo emprestimo = entityManager.find(Emprestimo.class, idEmprestimo);
+        entityManager.remove(emprestimo);
+        entityManager.getTransaction().commit();
     }
 }

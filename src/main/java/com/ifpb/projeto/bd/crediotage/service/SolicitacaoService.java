@@ -5,8 +5,6 @@ import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
 import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.*;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.PushBuilder;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -48,19 +46,22 @@ public class SolicitacaoService {
         if(aprovado){
             status = Status.APROVADO;
         }
-        for(UUID id : idSolicitacoes){
+        for(UUID id : idSolicitacoes) {
+
             Solicitacao solicitacao = solicitacaoDAO.buscarPorId(id);
+            solicitacaoDAO.atualizarStatus(solicitacao, status);
+
             BigDecimal valor = solicitacao.getValorSolicitado();
             BigDecimal juros = solicitacao.getProposta().getJuros();
             LocalDate dataDePagamento = solicitacao.getDataDePagamento();
             Cliente cliente = solicitacao.getCliente();
             Credor credor = solicitacao.getProposta().getCredor();
-
-            Emprestimo emprestimo = new Emprestimo(dataDePagamento, valor, juros, cliente, credor);
-            solicitacaoDAO.atualizarStatus(solicitacao, status);
-            emprestimoDAO.salvar(emprestimo);
+            //sanar problema de emprestimos duplicados
+            if (status == Status.APROVADO) {
+                Emprestimo emprestimo = new Emprestimo(dataDePagamento, valor, juros, cliente, credor);
+                emprestimoDAO.salvar(emprestimo);
+            }
         }
-
     }
 
     public List<Solicitacao> listarSolicitacoesAprovadas(){
