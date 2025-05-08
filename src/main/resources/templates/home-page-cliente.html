@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style-home-page-cliente.css">
 
+    <link rel="stylesheet" href="../static/css/style-home-page-cliente.css">
+
     <title>Crediotage - Inicio</title>
 
 </head>
@@ -47,10 +49,11 @@
                                     <td th:text="${emprestimo.dataPrazoFinal}"></td>
                                 </tr>
                             </tbody>
-                            <form action="/home/pagar" method="POST">
+                            
+                        </table>
+                        <form action="/home/pagar" method="POST">
                                 <button name="idEmprestimo" th:value="${emprestimo.id}">pagar</button>
                             </form>
-                        </table>
                     </div>
                 </div> 
             </div>

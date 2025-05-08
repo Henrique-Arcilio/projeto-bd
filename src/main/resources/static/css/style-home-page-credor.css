@@ -49,7 +49,7 @@ body .criar-emprestimo {
     align-items: center;
 
     width: 35rem;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 1rem;
 
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -57,11 +57,16 @@ body .criar-emprestimo {
 }
 
 .solicitacoes-de-emprestimo {
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .solicitacoes-aprovadas {
     gap: 2rem;
+}
+
+.botoes-aceitar-negar {
+    justify-content: center;
+    align-items: center;
 }
 
 .botoes-aceitar-negar{
@@ -70,9 +75,13 @@ body .criar-emprestimo {
     gap: 10px;
 }
 
-input {
-    max-width: 250px;
-    height: 44px;
+#checkbox input {
+    height: .5rem;
+}
+
+#valorMaximo, #juros, #dataLimite {
+    width: 10rem;
+    height: 2.5rem;
   
     background-color: #05060f11;
   
@@ -148,7 +157,7 @@ button:hover {
     }
 }
 
-button {
+button, .btn {
     box-sizing: border-box;
     border: 0;
     border-radius: 20px;

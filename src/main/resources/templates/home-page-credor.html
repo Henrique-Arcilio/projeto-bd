@@ -11,13 +11,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
     <!--<link rel="stylesheet" href="/css/style-home-page-credor.css">-->
-    <link rel="stylesheet" href="/css/style-home-page-credor.css">
-    
+    <link rel="stylesheet" href="../static/css/style-home-page-credor.css">
+
+
     <title>Crediotage - Incio</title>
 </head>
 <body>
     <div class="home-page-credor display-flex">
         <div class="home-area-credor display-flex">
+            <form action="/sair" method="POST">
+                <button>sair</button>
+            </form>
+            
             <div class="title">
                 <h1>Crediotage</h1>
             </div>
@@ -36,7 +41,7 @@
                         <label for="dataLimite">Dar prazo limite</label>
                         <input type="date" id="dataLimite" name="dataLimite">
                     </div>
-                    <button>criar</button>
+                    <button id="btn">criar</button>
                 </form>
             </div>
 
@@ -46,6 +51,7 @@
                 </div>
 
                 <div class="solicitacoes-info display-flex">
+                
                     <form action="home/gerenciar-solicitacao" method="POST">
                         <table class="tabela-style tabela-solicitacoes">
                             <thead >
@@ -65,7 +71,7 @@
                                     <td th:text="${solicitacao.dataDePagamento}"></td>
 
                                     <td>
-                                        <input type="checkbox" name="idSolicitacoes" th:value="${solicitacao.id}">
+                                        <input id="checkbox" type="checkbox" name="idSolicitacoes" th:value="${solicitacao.id}">
                                     </td>
                                 </tr>
                             </tbody>
