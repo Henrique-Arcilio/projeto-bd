@@ -21,6 +21,6 @@ public class EmprestimoService {
     }
 
     public void pagarEmprestimo(UUID idEmprestimo){
-        emprestimoDAO.deletarPorId(idEmprestimo);
+        emprestimoDAO.deletar(idEmprestimo);
     }
 }

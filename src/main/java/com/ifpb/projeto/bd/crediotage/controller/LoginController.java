@@ -4,7 +4,6 @@ import com.ifpb.projeto.bd.crediotage.model.Usuario;
 import com.ifpb.projeto.bd.crediotage.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

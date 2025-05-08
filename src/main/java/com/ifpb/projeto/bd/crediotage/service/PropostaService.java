@@ -28,7 +28,7 @@ public class PropostaService {
     }
 
     public Proposta buscarPorId(UUID id) {
-        return propostaDAO.buscarPorId(id);
+        return propostaDAO.buscar(id);
     }
 
     public List<Proposta> listar(){

@@ -26,7 +26,7 @@ public class SolicitacaoService {
     }
 
     public void criarSolicitacao(BigDecimal valor, LocalDate dataDePagamento, UUID idProposta) {
-        Proposta proposta = propostaDAO.buscarPorId(idProposta);
+        Proposta proposta = propostaDAO.buscar(idProposta);
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
@@ -48,7 +48,7 @@ public class SolicitacaoService {
         }
         for(UUID id : idSolicitacoes) {
 
-            Solicitacao solicitacao = solicitacaoDAO.buscarPorId(id);
+            Solicitacao solicitacao = solicitacaoDAO.buscar(id);
             solicitacaoDAO.atualizarStatus(solicitacao, status);
 
             BigDecimal valor = solicitacao.getValorSolicitado();
