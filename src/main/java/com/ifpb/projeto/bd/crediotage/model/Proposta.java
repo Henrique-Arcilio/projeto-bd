@@ -25,11 +25,13 @@ public class Proposta {
     private BigDecimal juros;
     @Column(nullable = false)
     private LocalDate dataLimite;
+
     @OneToOne
     @JoinColumn(name = "fk_credor")
     private Credor credor;
     @OneToMany(mappedBy = "proposta")
     private List<Solicitacao> solicitacoes;
+
     public Proposta(BigDecimal valorMaximo, BigDecimal juros, LocalDate dataLimite, Credor credor) {
         this.valorMaximo = valorMaximo;
         this.juros = juros;

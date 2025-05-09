@@ -18,21 +18,23 @@
 </head>
 <body>
     <div class="home-page-cliente display-flex">
-        <div class="title">
-            <h1></h1>
 
-        </div>
-        <div class="home-area-cliente display-flex">
+        <div class="cabecalho">
+            <h5 th:text="${nomeCliente}">Nome do Cliente</h5>
+
             <form action="/sair" method="POST">
                 <button>sair</button>
             </form>
+        </div>
+
+        <div class="home-area-cliente display-flex">
             <div class="emprestismo-atual-info display-flex">
-                <div class="emprestimo-atual display-flex">
+                <div class="emprestimo-atual display-flex" >
                     <div class="emprestimo">
                         <h3>Empresimo atual</h3>
                     </div>
-                    <div class="emprestimo-info display-flex">
-                        <table class="tabela-emprestimo-atual" th:if="${emprestimo != null}">
+                    <div class="emprestimo-info display-flex" th:if="${emprestimo != null}">
+                        <table class="tabela-emprestimo-atual">
                             <thead>
                                 <tr>
                                     <th>Valor</th>
@@ -59,7 +61,7 @@
             </div>
 
 
-            <div class="credores-disponiveis display-flex">
+            <div class="credores-disponiveis display-flex" th:if="${emprestimo == null}">
                 <div class="title">
                     <h3>Credores Disponiveis</h3>
                 </div>

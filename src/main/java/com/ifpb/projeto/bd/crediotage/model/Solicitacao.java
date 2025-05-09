@@ -17,10 +17,12 @@ public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private BigDecimal valorSolicitado;
     private LocalDate dataDePagamento;
     @Enumerated(EnumType.STRING)
     private Status status;
+
     @ManyToOne
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;

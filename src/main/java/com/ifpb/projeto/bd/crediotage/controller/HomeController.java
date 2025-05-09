@@ -32,12 +32,13 @@ public class HomeController {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if(usuario instanceof Cliente) {
-            List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarSolicitacaoPorCliente();
+            List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarPorCliente();
             List<Proposta> propostas = propostaService.listar();
             Emprestimo emprestimo = emprestimoService.buscarPorCliente((Cliente) usuario);
             model.addAttribute("propostas", propostas);
             model.addAttribute("solicitacoes", solicitacoesDoCliente);
             model.addAttribute("emprestimo", emprestimo);
+            model.addAttribute("nomeCliente", usuario.getNome());
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){
@@ -46,6 +47,8 @@ public class HomeController {
 
             List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesAprovadas();
             model.addAttribute("solicitacoesAprovadas", solicitacoesAprovadas);
+
+            model.addAttribute("nomeCliente", usuario.getNome());
 
             return "home-page-credor";
 
@@ -59,10 +62,10 @@ public class HomeController {
         emprestimoService.pagarEmprestimo(idEmprestimo);
         return "redirect:/home";
     }
+
     @PostMapping("/sair")
     public String sair(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
     }
-
 }

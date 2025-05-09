@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
-    <!--<link rel="stylesheet" href="/css/style-home-page-credor.css">-->
-    <link rel="stylesheet" href="../static/css/style-home-page-credor.css">
+    <link rel="stylesheet" href="/css/style-home-page-credor.css">
+    <!--<link rel="stylesheet" href="../static/css/style-home-page-credor.css">-->
 
 
     <title>Crediotage - Incio</title>
@@ -19,10 +19,13 @@
 <body>
     <div class="home-page-credor display-flex">
         <div class="home-area-credor display-flex">
-            <form action="/sair" method="POST">
-                <button>sair</button>
-            </form>
-            
+            <div class="cabecalho">
+                <h5 th:text="${nomeCliente}"></h5>
+
+                <form action="/sair" method="POST">
+                    <button>sair</button>
+                </form>
+            </div>
             <div class="title">
                 <h1>Crediotage</h1>
             </div>
@@ -31,15 +34,15 @@
                 <form action="home/criar-proposta" method="post">
                     <div class="row">
                         <label for="valorMaximo">Valor Maximo</label>
-                        <input id="valorMaximo" name="valorMaximo">
+                        <input id="valorMaximo" name="valorMaximo" required>
                     </div>
                     <div class="row">
                         <label for="juros">Juros</label>
-                        <input id="juros" name="juros">
+                        <input id="juros" name="juros" required>
                     </div>
                     <div class="row">
                         <label for="dataLimite">Dar prazo limite</label>
-                        <input type="date" id="dataLimite" name="dataLimite">
+                        <input type="date" id="dataLimite" name="dataLimite" required>
                     </div>
                     <button id="btn">criar</button>
                 </form>

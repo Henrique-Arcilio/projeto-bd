@@ -28,14 +28,20 @@ public class SolicitacaoService {
     public void criarSolicitacao(BigDecimal valor, LocalDate dataDePagamento, UUID idProposta) {
         Proposta proposta = propostaDAO.buscar(idProposta);
         Cliente cliente = (Cliente) session.getAttribute("usuario");
-        Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
-        solicitacaoDAO.salvar(solicitacao);
+
+
+        Solicitacao solicitacaoRetornada = solicitacaoDAO.buscarPorProsposta(proposta, cliente);
+        if(solicitacaoRetornada == null){
+            Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
+            solicitacaoDAO.salvar(solicitacao);
+        }
     }
 
-    public List<Solicitacao> buscarSolicitacaoPorCliente() {
+    public List<Solicitacao> buscarPorCliente() {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         return solicitacaoDAO.buscarPorCliente(cliente);
     }
+
 
     public List<Solicitacao> listar(){
         return solicitacaoDAO.listar();

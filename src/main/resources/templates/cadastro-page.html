@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style-cadastro.css">
+     <!-- <link rel="stylesheet" href="../static/css/style-cadastro.css"> -->
+
     <link rel="shortcut icon" href="/image/icon.jpg" type="image/x-icon">
 </head>
 <body>
@@ -20,44 +22,44 @@
                 <h1>Cadastrar</h1>
             </div>
 
-            <form action="/save" method="POST">
+            <form class="display-flex" action="/save" method="POST">
                 <div class="row">
                     <label class="label" for="name">Nome Completo</label>
-                    <input class="input" name="name" id="name">
+                    <input class="input" name="name" id="name" required>
                 </div>
 
                 <div class="row">
                     <label class="label" for="email">E-mail</label>
-                    <input class="input" type="email" name="email" id="email">
+                    <input class="input" type="email" name="email" id="email" required>
                 </div>
                 
 
                 <div class="row">
                     <label class="label" for="password">Senha</label>
-                    <input class="input" type="password" name="password" id="password">
+                    <input class="input" type="password" name="password" id="password" required>
                 </div>
                 
                 <div class="row">
                     <label class="label" for="cpf">CPF</label>
-                    <input class="input" name="cpf" id="cpf" maxlength="11" pattern="\d{11}" title="Digite apenas números">
+                    <input class="input" name="cpf" id="cpf" maxlength="11" pattern="\d{11}" title="Digite apenas números" required>
 
                 </div>
 
                 <div class="row">
                     <label class="label" for="endereco">endereco</label>
-                    <input class="input" type="endereco" name="endereco" id="endereco">
+                    <input class="input" type="endereco" name="endereco" id="endereco" required>
                 </div>
                 
                 <div class="row">
                     <label class="label" for="dataNascimento">Data de Nascimento</label>
-                    <input class="input" type="date" name="dataNascimento" id="dataNascimento">
+                    <input class="input" type="date" name="dataNascimento" id="dataNascimento" required>
                 </div>
 
                 <div class="row radio">
                     <label class="label">Tipo de Conta:</label>
-                    <input type="radio" name = "tipo" value="cliente">
+                    <input type="radio" name = "tipo" value="cliente" required>
                     <label>Cliente</label>
-                    <input type="radio" name = "tipo" value="credor">
+                    <input type="radio" name = "tipo" value="credor" required>
                     <label>Credor</label>
                 </div>
                 
