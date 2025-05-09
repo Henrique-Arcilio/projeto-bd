@@ -75,6 +75,7 @@
 }
 
 button {
+    width: 20rem;
     box-sizing: border-box;
     border: 0;
     border-radius: 20px;
@@ -99,7 +100,7 @@ form {
     flex-direction: column;
 
     justify-content: center;
-    width: 50v;
+    width: 50vw;
     gap: .1rem;
 
 }
