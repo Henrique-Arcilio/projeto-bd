@@ -30,7 +30,7 @@ public class SolicitacaoService {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
 
 
-        Solicitacao solicitacaoRetornada = solicitacaoDAO.buscarPorProsposta(proposta, cliente);
+        Solicitacao solicitacaoRetornada = solicitacaoDAO.buscarExistenteNaProposta(proposta, cliente);
         if(solicitacaoRetornada == null){
             Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
             solicitacaoDAO.salvar(solicitacao);
@@ -62,7 +62,6 @@ public class SolicitacaoService {
             LocalDate dataDePagamento = solicitacao.getDataDePagamento();
             Cliente cliente = solicitacao.getCliente();
             Credor credor = solicitacao.getProposta().getCredor();
-            //sanar problema de emprestimos duplicados
             if (status == Status.APROVADO) {
                 Emprestimo emprestimo = new Emprestimo(dataDePagamento, valor, juros, cliente, credor);
                 emprestimoDAO.salvar(emprestimo);

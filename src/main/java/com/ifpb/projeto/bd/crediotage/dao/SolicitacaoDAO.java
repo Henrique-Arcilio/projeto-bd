@@ -31,7 +31,7 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
         return query.getResultList();
     }
 
-    public Solicitacao buscarPorProsposta(Proposta proposta, Cliente cliente){
+    public Solicitacao buscarExistenteNaProposta(Proposta proposta, Cliente cliente){
         TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.proposta = :fk_proposta AND solicitacao.cliente = :fk_cliente", Solicitacao.class);
         query.setParameter("fk_proposta", proposta);
         query.setParameter("fk_cliente",cliente);

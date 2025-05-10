@@ -58,8 +58,8 @@ public class HomeController {
     }
 
     @PostMapping("/home/pagar")
-    public String pagarEmprestimo(@RequestParam UUID idEmprestimo){
-        emprestimoService.pagarEmprestimo(idEmprestimo);
+    public String quitarEmprestimo(@RequestParam UUID idEmprestimo){
+        emprestimoService.quitarEmprestimo(idEmprestimo);
         return "redirect:/home";
     }
 
