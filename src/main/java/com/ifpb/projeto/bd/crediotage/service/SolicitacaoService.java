@@ -5,7 +5,10 @@ import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
 import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.*;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,16 +28,20 @@ public class SolicitacaoService {
         this.session = session;
     }
 
-    public void criarSolicitacao(BigDecimal valor, LocalDate dataDePagamento, UUID idProposta) {
+    public void criarSolicitacao(BigDecimal valor, LocalDate dataDePagamento, UUID idProposta)  throws Exception{
         Proposta proposta = propostaDAO.buscar(idProposta);
         Cliente cliente = (Cliente) session.getAttribute("usuario");
 
 
         Solicitacao solicitacaoRetornada = solicitacaoDAO.buscarExistenteNaProposta(proposta, cliente);
-        if(solicitacaoRetornada == null){
+        if(valor.compareTo(proposta.getValorMaximo()) > 0){
+            throw new Exception("Você não pode pedir mais do que a proposta sugere");
+        }
+        else if(solicitacaoRetornada == null){
             Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
             solicitacaoDAO.salvar(solicitacao);
         }
+
     }
 
     public List<Solicitacao> buscarPorCliente() {

@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style-solicitacao.css">
-    <!--<link rel="stylesheet" href="../static/css/style-solicitacao.css">-->
 
     <title>Crediotage - Solicitando</title>
 </head>
@@ -18,8 +17,9 @@
         <div class="solicitacao-area display-flex">
             <h3>Solicitar Emprestimo</h3>
             <form action="criar-solicitacao" method="Post">
+                <p th:text="${error}"></p>
                 <label for="valor">Valor Solicitado</label>
-                <input id="valor" name="valor">
+                <input id="valor" name="valor" class="erro-valor">
                 <label for="dataDePagamento">Data de Pagamento</label>
                 <input id ="dataDePagamento" name="dataDePagamento" type="date">
                 <button>Solicitar emprestimo</button>

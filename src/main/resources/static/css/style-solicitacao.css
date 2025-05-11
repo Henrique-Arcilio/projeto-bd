@@ -98,4 +98,7 @@ form {
     justify-content: center;
     gap: 1rem;
 }
-  
+
+.erro-valor {
+    border-color: red;
+}
