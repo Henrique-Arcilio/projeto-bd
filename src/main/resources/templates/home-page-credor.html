@@ -67,7 +67,7 @@
                             </thead>
 
 
-                            <tbody th:each="solicitacao : ${solicitacoes}">
+                            <tbody th:each="solicitacao : ${solicitacoesPendentes}">
                                 <tr>
                                     <td th:text="${solicitacao.cliente.nome}"></td>
                                     <td th:text="${solicitacao.valorSolicitado}"></td>

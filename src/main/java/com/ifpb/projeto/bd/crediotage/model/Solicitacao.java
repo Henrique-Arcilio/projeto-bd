@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,9 +18,12 @@ import java.util.UUID;
 public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
-
+    @Column(nullable = false)
     private BigDecimal valorSolicitado;
+    @Column(nullable = false)
     private LocalDate dataDePagamento;
     @Enumerated(EnumType.STRING)
     private Status status;

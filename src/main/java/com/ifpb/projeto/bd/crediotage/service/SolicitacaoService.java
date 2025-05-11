@@ -5,9 +5,7 @@ import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
 import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
 import com.ifpb.projeto.bd.crediotage.model.*;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -32,18 +30,17 @@ public class SolicitacaoService {
         Proposta proposta = propostaDAO.buscar(idProposta);
         Cliente cliente = (Cliente) session.getAttribute("usuario");
 
-
-        Solicitacao solicitacaoRetornada = solicitacaoDAO.buscarExistenteNaProposta(proposta, cliente);
         if(valor.compareTo(proposta.getValorMaximo()) > 0){
             throw new Exception("Você não pode pedir mais do que a proposta sugere");
         }
-        else if(solicitacaoRetornada == null){
-            Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
-            solicitacaoDAO.salvar(solicitacao);
-        }
+        Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
+        solicitacaoDAO.salvar(solicitacao);
 
     }
-
+    public boolean isPropostaSolicitada(Proposta proposta, Cliente cliente){
+        Solicitacao solicitacao = solicitacaoDAO.buscarExistenteNaProposta(proposta, cliente);
+        return solicitacao != null;
+    }
     public List<Solicitacao> buscarPorCliente() {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         return solicitacaoDAO.buscarPorCliente(cliente);
@@ -76,12 +73,9 @@ public class SolicitacaoService {
         }
     }
 
-    public List<Solicitacao> listarSolicitacoesAprovadas(){
-        return solicitacaoDAO.listarPorStatus(Status.APROVADO);
-    }
-
-    public List<Solicitacao> listarSolicitacoesPendentes(){
-        return solicitacaoDAO.listarPorStatus(Status.PENDENTE);
+    public List<Solicitacao> listarSolicitacoesPorStatus(Status status, Credor credor){
+        Proposta proposta = propostaDAO.buscarPorCredor(credor);
+        return solicitacaoDAO.listarPorStatus(status, proposta);
     }
 
 }

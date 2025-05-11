@@ -33,8 +33,9 @@ public class HomeController {
 
         if(usuario instanceof Cliente) {
             List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarPorCliente();
-            List<Proposta> propostas = propostaService.listar();
+            List<Proposta> propostas = propostaService.buscarNaoSolicitadas((Cliente) usuario);
             Emprestimo emprestimo = emprestimoService.buscarPorCliente((Cliente) usuario);
+
             model.addAttribute("propostas", propostas);
             model.addAttribute("solicitacoes", solicitacoesDoCliente);
             model.addAttribute("emprestimo", emprestimo);
@@ -42,12 +43,11 @@ public class HomeController {
             return "home-page-cliente";
 
         }else if (usuario instanceof Credor){
-            List<Solicitacao> todasSolicitacoes = solicitacaoService.listarSolicitacoesPendentes();
-            model.addAttribute("solicitacoes", todasSolicitacoes);
+            List<Solicitacao> solicitacoesPendentes = solicitacaoService.listarSolicitacoesPorStatus(Status.PENDENTE, (Credor) usuario);
+            List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesPorStatus(Status.APROVADO, (Credor) usuario);
 
-            List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesAprovadas();
+            model.addAttribute("solicitacoesPendentes", solicitacoesPendentes);
             model.addAttribute("solicitacoesAprovadas", solicitacoesAprovadas);
-
             model.addAttribute("nomeCliente", usuario.getNome());
 
             return "home-page-credor";

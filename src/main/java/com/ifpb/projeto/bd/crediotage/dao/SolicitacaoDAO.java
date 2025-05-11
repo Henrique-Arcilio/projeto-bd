@@ -18,10 +18,12 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
         super(emf, Solicitacao.class);
     }
 
-    public List<Solicitacao> listarPorStatus(Status status) {
-        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.status = :status", Solicitacao.class);
+    public List<Solicitacao> listarPorStatus(Status status, Proposta proposta) {
+        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.status =:status AND solicitacao.proposta =:fk_proposta AND solicitacao.cliente.emprestimo IS NULL", Solicitacao.class);
         query.setParameter("status", status);
+        query.setParameter("fk_proposta", proposta);
         return query.getResultList();
+
     }
 
 

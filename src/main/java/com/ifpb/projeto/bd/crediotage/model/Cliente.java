@@ -18,10 +18,6 @@ import java.util.List;
 @DiscriminatorValue("Cliente")
 public class Cliente extends Usuario{
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private Score score;
-
     @OneToMany(mappedBy = "cliente")
     private List<Solicitacao> solicitacoes;
 
