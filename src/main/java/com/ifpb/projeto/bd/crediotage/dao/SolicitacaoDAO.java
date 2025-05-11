@@ -19,7 +19,13 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
     }
 
     public List<Solicitacao> listarPorStatus(Status status, Proposta proposta) {
-        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.status =:status AND solicitacao.proposta =:fk_proposta AND solicitacao.cliente.emprestimo IS NULL", Solicitacao.class);
+        comando = """
+                SELECT solicitacao FROM Solicitacao solicitacao
+                WHERE solicitacao.status =:status
+                AND solicitacao.proposta =:fk_proposta
+                AND solicitacao.cliente.emprestimo IS NULL""";
+
+        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
         query.setParameter("status", status);
         query.setParameter("fk_proposta", proposta);
         return query.getResultList();
@@ -28,13 +34,19 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
 
 
     public List<Solicitacao> buscarPorCliente(Cliente cliente) {
-        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.cliente = :fk_cliente", Solicitacao.class);
+        comando = "SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.cliente = :fk_cliente";
+        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
         query.setParameter("fk_cliente", cliente);
         return query.getResultList();
     }
 
     public Solicitacao buscarExistenteNaProposta(Proposta proposta, Cliente cliente){
-        TypedQuery<Solicitacao> query = entityManager.createQuery("SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.proposta = :fk_proposta AND solicitacao.cliente = :fk_cliente", Solicitacao.class);
+        comando = """
+                SELECT solicitacao FROM Solicitacao solicitacao
+                WHERE solicitacao.proposta = :fk_proposta
+                AND solicitacao.cliente = :fk_cliente""";
+
+        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
         query.setParameter("fk_proposta", proposta);
         query.setParameter("fk_cliente",cliente);
         return query.getSingleResultOrNull();

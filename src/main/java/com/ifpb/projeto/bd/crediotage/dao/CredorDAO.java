@@ -17,11 +17,14 @@ public class CredorDAO extends GenericoDAO<Credor> {
 
     public Credor buscarLogin(String CPF, String password) {
         try {
-            TypedQuery<Credor> query = entityManager.createQuery("SELECT Credor FROM Credor Credor WHERE Credor.CPF = :CPF AND Credor.password = :password", Credor.class);
+            comando = """
+                    SELECT Credor FROM Credor Credor
+                    WHERE Credor.CPF = :CPF
+                    AND Credor.password = :password""";
+            TypedQuery<Credor> query = entityManager.createQuery(comando, Credor.class);
 
             query.setParameter("CPF", CPF);
             query.setParameter("password", password);
-
             return query.getSingleResult();
         } catch (NoResultException e) {
             return null;

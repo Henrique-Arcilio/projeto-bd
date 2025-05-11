@@ -31,10 +31,10 @@ public class HomeController {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        if(usuario instanceof Cliente) {
+        if(usuario instanceof Cliente cliente) { //citar pattern matching
             List<Solicitacao> solicitacoesDoCliente = solicitacaoService.buscarPorCliente();
-            List<Proposta> propostas = propostaService.buscarNaoSolicitadas((Cliente) usuario);
-            Emprestimo emprestimo = emprestimoService.buscarPorCliente((Cliente) usuario);
+            List<Proposta> propostas = propostaService.buscarNaoSolicitadas(cliente);
+            Emprestimo emprestimo = emprestimoService.buscarPorCliente(cliente);
 
             model.addAttribute("propostas", propostas);
             model.addAttribute("solicitacoes", solicitacoesDoCliente);
@@ -42,9 +42,9 @@ public class HomeController {
             model.addAttribute("nomeCliente", usuario.getNome());
             return "home-page-cliente";
 
-        }else if (usuario instanceof Credor){
-            List<Solicitacao> solicitacoesPendentes = solicitacaoService.listarSolicitacoesPorStatus(Status.PENDENTE, (Credor) usuario);
-            List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesPorStatus(Status.APROVADO, (Credor) usuario);
+        }else if (usuario instanceof Credor credor){
+            List<Solicitacao> solicitacoesPendentes = solicitacaoService.listarSolicitacoesPorStatus(Status.PENDENTE, credor);
+            List<Solicitacao> solicitacoesAprovadas = solicitacaoService.listarSolicitacoesPorStatus(Status.APROVADO, credor);
 
             model.addAttribute("solicitacoesPendentes", solicitacoesPendentes);
             model.addAttribute("solicitacoesAprovadas", solicitacoesAprovadas);

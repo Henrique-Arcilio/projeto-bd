@@ -12,7 +12,8 @@ public class PropostaDAO extends GenericoDAO<Proposta> {
         super(emf, Proposta.class);
     }
     public Proposta buscarPorCredor(Credor credor){
-        TypedQuery<Proposta> query = entityManager.createQuery("SELECT proposta FROM Proposta proposta WHERE proposta.credor = :fk_credor", Proposta.class);
+        comando = "SELECT proposta FROM Proposta proposta WHERE proposta.credor = :fk_credor";
+        TypedQuery<Proposta> query = entityManager.createQuery(comando, Proposta.class);
         query.setParameter("fk_credor", credor);
         return query.getSingleResultOrNull();
     }

@@ -31,7 +31,7 @@ public class SolicitacaoService {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
 
         if(valor.compareTo(proposta.getValorMaximo()) > 0){
-            throw new Exception("Você não pode pedir mais do que a proposta sugere");
+            throw new Exception("Você não deve pedir mais que o proposto");
         }
         Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
@@ -57,7 +57,6 @@ public class SolicitacaoService {
             status = Status.APROVADO;
         }
         for(UUID id : idSolicitacoes) {
-
             Solicitacao solicitacao = solicitacaoDAO.buscar(id);
             solicitacaoDAO.atualizarStatus(solicitacao, status);
 
@@ -66,6 +65,7 @@ public class SolicitacaoService {
             LocalDate dataDePagamento = solicitacao.getDataDePagamento();
             Cliente cliente = solicitacao.getCliente();
             Credor credor = solicitacao.getProposta().getCredor();
+
             if (status == Status.APROVADO) {
                 Emprestimo emprestimo = new Emprestimo(dataDePagamento, valor, juros, cliente, credor);
                 emprestimoDAO.salvar(emprestimo);

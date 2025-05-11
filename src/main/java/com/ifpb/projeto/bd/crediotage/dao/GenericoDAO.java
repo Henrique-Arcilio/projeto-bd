@@ -13,7 +13,7 @@ public abstract class GenericoDAO<T> implements DAO<T>{
     private EntityManagerFactory emf;
     protected EntityManager entityManager;
     private Class<T> classeDaEntidade; // É igual quando nós pega NomeDaClasse.class (ex.: Cliente.class)
-
+    protected String comando;
     public GenericoDAO(EntityManagerFactory emf, Class<T> classeDaEntidade) {
         this.emf = emf;
         this.entityManager = emf.createEntityManager();
@@ -22,7 +22,7 @@ public abstract class GenericoDAO<T> implements DAO<T>{
 
     @Override
     public List<T> listar() {
-        String comando = "SELECT entidade FROM " + classeDaEntidade.getSimpleName() + " entidade";
+        this.comando = "SELECT entidade FROM " + classeDaEntidade.getSimpleName() + " entidade";
         TypedQuery<T> query = entityManager.createQuery(comando, classeDaEntidade);
         return query.getResultList();
     }
