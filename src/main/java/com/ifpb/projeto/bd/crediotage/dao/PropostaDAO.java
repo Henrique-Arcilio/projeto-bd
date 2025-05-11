@@ -8,13 +8,24 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PropostaDAO extends GenericoDAO<Proposta> {
+
     public PropostaDAO(EntityManagerFactory emf) {
         super(emf, Proposta.class);
     }
+
     public Proposta buscarPorCredor(Credor credor){
         comando = "SELECT proposta FROM Proposta proposta WHERE proposta.credor = :fk_credor";
-        TypedQuery<Proposta> query = entityManager.createQuery(comando, Proposta.class);
-        query.setParameter("fk_credor", credor);
-        return query.getSingleResultOrNull();
+
+        try {
+            this.entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Proposta> query = entityManager.createQuery(comando, Proposta.class);
+            query.setParameter("fk_credor", credor);
+            return query.getSingleResultOrNull();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            entityManager.close();
+        }
+
     }
 }

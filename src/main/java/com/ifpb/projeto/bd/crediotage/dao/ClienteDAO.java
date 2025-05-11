@@ -2,7 +2,6 @@ package com.ifpb.projeto.bd.crediotage.dao;
 
 import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 
@@ -16,15 +15,21 @@ public class ClienteDAO extends GenericoDAO<Cliente>{
     }
 
     public Cliente buscarLogin(String CPF, String password) {
+        comando = """
+                SELECT Cliente FROM Cliente Cliente
+                WHERE Cliente.CPF = :CPF
+                AND Cliente.password = :password""";
         try {
-            TypedQuery<Cliente> query = entityManager.createQuery("SELECT Cliente FROM Cliente Cliente WHERE Cliente.CPF = :CPF AND Cliente.password = :password", Cliente.class);
-            
+            entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Cliente> query = entityManager.createQuery(comando, Cliente.class);
             query.setParameter("CPF", CPF);
             query.setParameter("password", password);
-            
             return query.getSingleResult();
-        } catch (NoResultException e) {
+        }catch (Exception e){
             return null;
+        }
+        finally {
+            entityManager.close();
         }
     }
 }

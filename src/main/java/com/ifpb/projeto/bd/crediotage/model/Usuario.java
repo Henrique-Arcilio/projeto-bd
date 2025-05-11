@@ -29,7 +29,7 @@ public abstract class Usuario {
     private String email;
     @Column(nullable = false, length = 11)
     private String CPF;
-    @Column(nullable = false, length = 22)
+    @Column(nullable = false)
     private String password;
     @Column(nullable = false)
     private String endereco;

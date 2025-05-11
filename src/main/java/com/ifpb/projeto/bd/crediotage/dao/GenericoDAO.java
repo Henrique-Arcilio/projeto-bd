@@ -10,40 +10,72 @@ import java.util.UUID;
 @Repository
 public abstract class GenericoDAO<T> implements DAO<T>{
 
-    private EntityManagerFactory emf;
+    protected final EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
     private Class<T> classeDaEntidade; // É igual quando nós pega NomeDaClasse.class (ex.: Cliente.class)
     protected String comando;
-    public GenericoDAO(EntityManagerFactory emf, Class<T> classeDaEntidade) {
-        this.emf = emf;
-        this.entityManager = emf.createEntityManager();
+
+    public GenericoDAO(EntityManagerFactory entityManagerFactory, Class<T> classeDaEntidade) {
+        this.entityManagerFactory = entityManagerFactory;
         this.classeDaEntidade = classeDaEntidade;
     }
 
     @Override
     public List<T> listar() {
-        this.comando = "SELECT entidade FROM " + classeDaEntidade.getSimpleName() + " entidade";
-        TypedQuery<T> query = entityManager.createQuery(comando, classeDaEntidade);
-        return query.getResultList();
+        comando = "SELECT entidade FROM " + classeDaEntidade.getSimpleName() + " entidade";
+
+        try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<T> query = entityManager.createQuery(comando, classeDaEntidade);
+            return query.getResultList();
+
+        }catch (Exception e){
+            return null;
+        } finally {
+            entityManager.close();
+        }
+
     }
 
     @Override
     public void salvar(T entidade) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(entidade);
-        entityManager.getTransaction().commit();
+        try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entidade);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+        }finally {
+            entityManager.close();
+        }
+
     }
 
     @Override
     public T buscar(UUID id) {
-        return entityManager.find(classeDaEntidade, id);
+        try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            return entityManager.find(classeDaEntidade, id);
+        }catch (Exception e){
+            return null;
+        }finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public void deletar(UUID idEntidade){
-        entityManager.getTransaction().begin();
-        T entidade = entityManager.find(classeDaEntidade, idEntidade);
-        entityManager.remove(entidade);
-        entityManager.getTransaction().commit();
+        try{
+            entityManager.getTransaction().begin();
+            T entidade = entityManager.find(classeDaEntidade, idEntidade);
+            entityManager.remove(entidade);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+        }finally {
+            entityManager.close();
+        }
+
     }
 }

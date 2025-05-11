@@ -12,49 +12,82 @@ import java.util.List;
 
 @Repository
 public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
-    private EntityManagerFactory emf;
 
-    public SolicitacaoDAO(EntityManagerFactory emf) {
-        super(emf, Solicitacao.class);
+    public SolicitacaoDAO(EntityManagerFactory entityManagerFactory) {
+        super(entityManagerFactory, Solicitacao.class);
     }
 
     public List<Solicitacao> listarPorStatus(Status status, Proposta proposta) {
         comando = """
                 SELECT solicitacao FROM Solicitacao solicitacao
                 WHERE solicitacao.status =:status
-                AND solicitacao.proposta =:fk_proposta
-                AND solicitacao.cliente.emprestimo IS NULL""";
+                AND solicitacao.proposta =:fk_proposta""";
 
-        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
-        query.setParameter("status", status);
-        query.setParameter("fk_proposta", proposta);
-        return query.getResultList();
+        if(status == Status.PENDENTE){
+            comando +=  " AND solicitacao.cliente.emprestimo IS NULL";
+        }
 
+        try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
+            query.setParameter("status", status);
+            query.setParameter("fk_proposta", proposta);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            entityManager.close();
+        }
     }
 
 
     public List<Solicitacao> buscarPorCliente(Cliente cliente) {
         comando = "SELECT solicitacao FROM Solicitacao solicitacao WHERE solicitacao.cliente = :fk_cliente";
-        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
-        query.setParameter("fk_cliente", cliente);
-        return query.getResultList();
+
+        try {
+            this.entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
+            query.setParameter("fk_cliente", cliente);
+            return query.getResultList();
+        }catch (Exception e){
+           return null;
+        }finally{
+            entityManager.close();
+        }
+
     }
 
     public Solicitacao buscarExistenteNaProposta(Proposta proposta, Cliente cliente){
-        comando = """
+        try {
+            this.entityManager = entityManagerFactory.createEntityManager();
+            comando = """
                 SELECT solicitacao FROM Solicitacao solicitacao
                 WHERE solicitacao.proposta = :fk_proposta
-                AND solicitacao.cliente = :fk_cliente""";
+                AND solicitacao.cliente = :fk_cliente AND NOT solicitacao.status = :status""";
 
-        TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
-        query.setParameter("fk_proposta", proposta);
-        query.setParameter("fk_cliente",cliente);
-        return query.getSingleResultOrNull();
+            TypedQuery<Solicitacao> query = entityManager.createQuery(comando, Solicitacao.class);
+            query.setParameter("fk_proposta", proposta);
+            query.setParameter("fk_cliente",cliente);
+            query.setParameter("status", Status.NEGADO);
+            return query.getSingleResultOrNull();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            entityManager.close();
+        }
     }
 
     public void atualizarStatus(Solicitacao solicitacao, Status status) {
-        entityManager.getTransaction().begin();
-        solicitacao.setStatus(status);
-        entityManager.getTransaction().commit();
+        try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+            solicitacao.setStatus(status);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+        }finally {
+            entityManager.close();
+        }
+
     }
 }

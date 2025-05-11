@@ -2,7 +2,6 @@ package com.ifpb.projeto.bd.crediotage.dao;
 
 import com.ifpb.projeto.bd.crediotage.model.Credor;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 
@@ -16,18 +15,21 @@ public class CredorDAO extends GenericoDAO<Credor> {
     }
 
     public Credor buscarLogin(String CPF, String password) {
-        try {
-            comando = """
+        comando = """
                     SELECT Credor FROM Credor Credor
                     WHERE Credor.CPF = :CPF
                     AND Credor.password = :password""";
-            TypedQuery<Credor> query = entityManager.createQuery(comando, Credor.class);
 
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Credor> query = entityManager.createQuery(comando, Credor.class);
             query.setParameter("CPF", CPF);
             query.setParameter("password", password);
             return query.getSingleResult();
-        } catch (NoResultException e) {
+        }catch (Exception e){
             return null;
+        }finally {
+            entityManager.close();
         }
     }
 }

@@ -30,6 +30,7 @@ public class PropostaService {
         Proposta posposta = new Proposta(valorMaximo, juros, dataLimite, credor);
         propostaDAO.salvar(posposta);
     }
+
     public List<Proposta> buscarNaoSolicitadas(Cliente cliente){
         List<Proposta> propostaList = new ArrayList<>();
         for(Proposta proposta : propostaDAO.listar()){

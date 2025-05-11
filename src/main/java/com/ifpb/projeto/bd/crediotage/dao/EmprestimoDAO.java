@@ -14,13 +14,16 @@ public class EmprestimoDAO extends GenericoDAO<Emprestimo>{
         super(emf, Emprestimo.class);
     }
     public Emprestimo buscarPorCliente(Cliente cliente){
-        TypedQuery<Emprestimo> query = entityManager.createQuery("SELECT Emprestimo FROM Emprestimo Emprestimo where Emprestimo.cliente = :fk_cliente", Emprestimo.class);
-        query.setParameter("fk_cliente", cliente);
+        comando = "SELECT Emprestimo FROM Emprestimo Emprestimo where Emprestimo.cliente = :fk_cliente";
         try{
+            this.entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Emprestimo> query = entityManager.createQuery(comando, Emprestimo.class);
+            query.setParameter("fk_cliente", cliente);
             return query.getSingleResult();
-        }
-        catch (Exception e ){
+        } catch (Exception e){
             return null;
+        } finally {
+            this.entityManager.close();
         }
     }
 }
