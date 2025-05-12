@@ -32,4 +32,18 @@ public class ClienteDAO extends GenericoDAO<Cliente>{
             entityManager.close();
         }
     }
+    public Cliente buscarPorCPF(String CPF){
+        comando ="SELECT Cliente FROM Cliente Cliente WHERE Cliente.CPF = :CPF";
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Cliente> query = entityManager.createQuery(comando, Cliente.class);
+            query.setParameter("CPF", CPF);
+            return query.getSingleResultOrNull();
+        }catch (Exception e){
+            return null;
+        }
+        finally {
+            entityManager.close();
+        }
+    }
 }

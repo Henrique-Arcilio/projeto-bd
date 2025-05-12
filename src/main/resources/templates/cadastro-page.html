@@ -17,11 +17,13 @@
 <body>
     <div class="cadastro-page display-flex">
         <div class="cadastro-area display-flex">
+
             <div class="title">
                 <h1>Cadastrar</h1>
             </div>
 
             <form class="display-flex" action="/save" method="POST">
+                <p th:text="${erro}" style="color:red"></p>
                 <div class="row">
                     <label class="label" for="name">Nome Completo</label>
                     <input class="input" name="name" id="name" required>

@@ -27,7 +27,7 @@ public abstract class Usuario {
     private String nome;
     @Column(nullable=false)
     private String email;
-    @Column(nullable = false, length = 11)
+    @Column(unique = true, nullable = false, length = 11)
     private String CPF;
     @Column(nullable = false)
     private String password;

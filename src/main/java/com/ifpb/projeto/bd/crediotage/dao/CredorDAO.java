@@ -1,5 +1,6 @@
 package com.ifpb.projeto.bd.crediotage.dao;
 
+import com.ifpb.projeto.bd.crediotage.model.Cliente;
 import com.ifpb.projeto.bd.crediotage.model.Credor;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -29,6 +30,21 @@ public class CredorDAO extends GenericoDAO<Credor> {
         }catch (Exception e){
             return null;
         }finally {
+            entityManager.close();
+        }
+    }
+
+    public Cliente buscarPorCPF(String CPF){
+        comando ="SELECT Credor FROM Cliente Credor WHERE Credor.CPF = :CPF";
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            TypedQuery<Cliente> query = entityManager.createQuery(comando, Cliente.class);
+            query.setParameter("CPF", CPF);
+            return query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+        finally {
             entityManager.close();
         }
     }

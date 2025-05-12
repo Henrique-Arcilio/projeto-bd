@@ -22,6 +22,7 @@
             </div>
 
             <form action="/autenticar" method="POST" >
+                <p th:text="${erro}" style="color:red"></p>
                 <div class="row">
                     <label class="label" for="cpf">CPF</label>
                     <input class="input" name="cpf" id="cpf">
