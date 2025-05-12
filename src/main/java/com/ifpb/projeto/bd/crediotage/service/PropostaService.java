@@ -34,7 +34,7 @@ public class PropostaService {
     public List<Proposta> buscarNaoSolicitadas(Cliente cliente){
         List<Proposta> propostaList = new ArrayList<>();
         for(Proposta proposta : propostaDAO.listar()){
-            if(!(solicitacaoService.isPropostaSolicitada(proposta, cliente))){
+            if(!(solicitacaoService.existeSolicitacaoAtiva(proposta, cliente))){
                propostaList.add(proposta);
             }
         }

@@ -1,8 +1,6 @@
 package com.ifpb.projeto.bd.crediotage.service;
 
-import com.ifpb.projeto.bd.crediotage.dao.EmprestimoDAO;
-import com.ifpb.projeto.bd.crediotage.dao.PropostaDAO;
-import com.ifpb.projeto.bd.crediotage.dao.SolicitacaoDAO;
+import com.ifpb.projeto.bd.crediotage.dao.*;
 import com.ifpb.projeto.bd.crediotage.model.*;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +10,14 @@ import java.util.UUID;
 public class EmprestimoService {
     private EmprestimoDAO emprestimoDAO;
     private SolicitacaoDAO solicitacaoDAO;
-    private PropostaDAO propostaDAO;
+    private CredorDAO credorDAO;
+    private ClienteDAO clienteDAO;
 
-    public EmprestimoService(EmprestimoDAO emprestimoDAO, SolicitacaoDAO solicitacaoDAO, PropostaDAO propostaDAO) {
+    public EmprestimoService(EmprestimoDAO emprestimoDAO, SolicitacaoDAO solicitacaoDAO, CredorDAO credorDAO, ClienteDAO clienteDAO) {
         this.emprestimoDAO = emprestimoDAO;
         this.solicitacaoDAO = solicitacaoDAO;
-        this.propostaDAO = propostaDAO;
+        this.credorDAO = credorDAO;
+        this.clienteDAO = clienteDAO;
     }
 
     public Emprestimo buscarPorCliente(Cliente cliente){
@@ -25,16 +25,19 @@ public class EmprestimoService {
     }
 
     public void quitarEmprestimo(UUID idEmprestimo){
+
         Emprestimo emprestimo = emprestimoDAO.buscar(idEmprestimo);
-        Solicitacao solicitacao = buscarSolicitacaoRelacionada(emprestimo);
-        solicitacaoDAO.deletar(solicitacao.getId());
-        emprestimoDAO.deletar(idEmprestimo);
+        Credor credor = emprestimo.getCredor();
+        Cliente cliente = emprestimo.getCliente();
+
+        cliente.setEmprestimo(null);
+        credor.getEmprestimos().remove(emprestimo);
+        credorDAO.salvar(credor);
+        clienteDAO.salvar(cliente);
+
+        Solicitacao solicitacao = solicitacaoDAO.buscarNaoNegados(credor.getProposta(), cliente);
+        UUID idSolicitacao = solicitacao.getId();
+        solicitacaoDAO.deletar(idSolicitacao);
     }
 
-    public Solicitacao buscarSolicitacaoRelacionada(Emprestimo emprestimo){
-        Cliente cliente = emprestimo.getCliente();
-        Credor credor = emprestimo.getCredor();
-        Proposta propostaDoCredor = propostaDAO.buscarPorCredor(credor);
-        return solicitacaoDAO.buscarExistenteNaProposta(propostaDoCredor, cliente);
-    }
 }

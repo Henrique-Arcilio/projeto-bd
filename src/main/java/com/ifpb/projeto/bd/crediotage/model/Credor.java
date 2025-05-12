@@ -14,10 +14,10 @@ import java.util.List;
 @DiscriminatorValue("Credor")
 public class Credor extends Usuario{
 
-    @OneToMany(mappedBy = "credor")
-    private List<Emprestimo> emprestimo;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "credor", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Emprestimo> emprestimos;
 
-    @OneToOne(mappedBy = "credor")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "credor")
     private Proposta proposta;
 
     public Credor(String name, String email, String cpf, String password, String endereco, LocalDate dataNascimento){

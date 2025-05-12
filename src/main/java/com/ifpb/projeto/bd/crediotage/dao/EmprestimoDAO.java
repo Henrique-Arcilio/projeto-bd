@@ -6,7 +6,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
 public class EmprestimoDAO extends GenericoDAO<Emprestimo>{
 

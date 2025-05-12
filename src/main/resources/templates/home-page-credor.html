@@ -29,7 +29,7 @@
                 <h1>Crediotage</h1>
             </div>
 
-            <div class="criar-emprestimo display-flex">
+            <div class="criar-emprestimo display-flex" th:if="${mostrarCriarProposta}">
                 <form action="home/criar-proposta" method="post">
                     <div class="row">
                         <label for="valorMaximo">Valor Maximo</label>

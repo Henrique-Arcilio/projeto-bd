@@ -16,8 +16,9 @@
     <div class="solicitacao-page display-flex">
         <div class="solicitacao-area display-flex">
             <h3>Solicitar Emprestimo</h3>
+            <p th:text="${error}" style="color:red"></p>
             <form action="criar-solicitacao" method="Post">
-                <p th:text="${error}" style="color:red"></p>
+
                 <label for="valor">Valor Solicitado</label>
                 <input id="valor" name="valor" class="erro-valor">
                 <label for="dataDePagamento">Data de Pagamento</label>

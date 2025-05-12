@@ -42,7 +42,7 @@ public abstract class GenericoDAO<T> implements DAO<T>{
         try{
             this.entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
-            entityManager.persist(entidade);
+            entityManager.merge(entidade);
             entityManager.getTransaction().commit();
         }catch (Exception e){
             entityManager.getTransaction().rollback();
@@ -67,11 +67,13 @@ public abstract class GenericoDAO<T> implements DAO<T>{
     @Override
     public void deletar(UUID idEntidade){
         try{
+            entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             T entidade = entityManager.find(classeDaEntidade, idEntidade);
             entityManager.remove(entidade);
             entityManager.getTransaction().commit();
         }catch (Exception e){
+            System.out.println(e.getCause() + e.getMessage());
             entityManager.getTransaction().rollback();
         }finally {
             entityManager.close();

@@ -48,6 +48,8 @@ public class HomeController {
 
             model.addAttribute("solicitacoesPendentes", solicitacoesPendentes);
             model.addAttribute("solicitacoesAprovadas", solicitacoesAprovadas);
+            System.out.println(credor.getProposta());
+            model.addAttribute("mostrarCriarProposta", credor.getProposta() == null);
             model.addAttribute("nomeCliente", usuario.getNome());
 
             return "home-page-credor";

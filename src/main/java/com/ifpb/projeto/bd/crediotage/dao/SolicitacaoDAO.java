@@ -7,8 +7,8 @@ import com.ifpb.projeto.bd.crediotage.model.Status;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
@@ -57,7 +57,7 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
 
     }
 
-    public Solicitacao buscarExistenteNaProposta(Proposta proposta, Cliente cliente){
+    public Solicitacao buscarNaoNegados(Proposta proposta, Cliente cliente){
         try {
             this.entityManager = entityManagerFactory.createEntityManager();
             comando = """
@@ -77,14 +77,17 @@ public class SolicitacaoDAO extends GenericoDAO<Solicitacao> {
         }
     }
 
-    public void atualizarStatus(Solicitacao solicitacao, Status status) {
+    public Solicitacao atualizarStatus(UUID id, Status status) {
         try{
             this.entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
+            Solicitacao solicitacao = entityManager.find(Solicitacao.class,id);
             solicitacao.setStatus(status);
             entityManager.getTransaction().commit();
+            return solicitacao;
         }catch (Exception e){
             entityManager.getTransaction().rollback();
+            return null;
         }finally {
             entityManager.close();
         }

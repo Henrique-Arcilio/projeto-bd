@@ -17,7 +17,7 @@ public class Cliente extends Usuario{
     @OneToMany(mappedBy = "cliente")
     private List<Solicitacao> solicitacoes;
 
-    @OneToOne(mappedBy = "cliente")
+    @OneToOne(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL)
     private Emprestimo emprestimo;
 
     public Cliente(String name, String email, String cpf, String password, String endereco, LocalDate dataNascimento){

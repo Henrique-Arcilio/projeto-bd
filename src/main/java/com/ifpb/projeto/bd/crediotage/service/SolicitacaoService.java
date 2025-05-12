@@ -35,21 +35,18 @@ public class SolicitacaoService {
         }
         Solicitacao solicitacao = new Solicitacao(valor, dataDePagamento, cliente, proposta);
         solicitacaoDAO.salvar(solicitacao);
-
     }
-    public boolean isPropostaSolicitada(Proposta proposta, Cliente cliente){
-        Solicitacao solicitacao = solicitacaoDAO.buscarExistenteNaProposta(proposta, cliente);
+
+    public boolean existeSolicitacaoAtiva(Proposta proposta, Cliente cliente){
+        Solicitacao solicitacao = solicitacaoDAO.buscarNaoNegados(proposta, cliente);
         return solicitacao != null;
     }
+
     public List<Solicitacao> buscarPorCliente() {
         Cliente cliente = (Cliente) session.getAttribute("usuario");
         return solicitacaoDAO.buscarPorCliente(cliente);
     }
 
-
-    public List<Solicitacao> listar(){
-        return solicitacaoDAO.listar();
-    }
 
     public void atualizarSolicitacao(List<UUID> idSolicitacoes, boolean aprovado){
         Status status = Status.NEGADO;
@@ -57,8 +54,7 @@ public class SolicitacaoService {
             status = Status.APROVADO;
         }
         for(UUID id : idSolicitacoes) {
-            Solicitacao solicitacao = solicitacaoDAO.buscar(id);
-            solicitacaoDAO.atualizarStatus(solicitacao, status);
+            Solicitacao solicitacao = solicitacaoDAO.atualizarStatus(id, status);
 
             BigDecimal valor = solicitacao.getValorSolicitado();
             BigDecimal juros = solicitacao.getProposta().getJuros();

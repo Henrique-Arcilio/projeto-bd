@@ -32,7 +32,7 @@ public class Proposta {
     @OneToOne
     @JoinColumn(name = "fk_credor")
     private Credor credor;
-    @OneToMany(mappedBy = "proposta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proposta")
     private List<Solicitacao> solicitacoes;
 
     public Proposta(BigDecimal valorMaximo, BigDecimal juros, LocalDate dataLimite, Credor credor) {
