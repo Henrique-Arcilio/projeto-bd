@@ -73,7 +73,6 @@ public abstract class GenericoDAO<T> implements DAO<T>{
             entityManager.remove(entidade);
             entityManager.getTransaction().commit();
         }catch (Exception e){
-            System.out.println(e.getCause() + e.getMessage());
             entityManager.getTransaction().rollback();
         }finally {
             entityManager.close();

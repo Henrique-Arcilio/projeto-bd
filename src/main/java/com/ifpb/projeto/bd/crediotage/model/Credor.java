@@ -14,7 +14,7 @@ import java.util.List;
 @DiscriminatorValue("Credor")
 public class Credor extends Usuario{
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "credor", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "credor", orphanRemoval = true)
     private List<Emprestimo> emprestimos;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "credor")
