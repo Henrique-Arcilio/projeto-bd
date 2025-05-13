@@ -19,15 +19,11 @@ public class LoginController {
 
     @PostMapping("/autenticar")
     public String validarLogin(@RequestParam String cpf, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes){
-        try {
-            Usuario usuario = service.validarLogin(cpf, password);
-            if(usuario != null){
-                session.setAttribute("usuario", usuario);
-                return "redirect:/home";
-            } else {
-                redirectAttributes.addFlashAttribute("erro", "CPF ou senha inválidos.");
-            }
-        } catch (Exception e) {
+        Usuario usuario = service.validarLogin(cpf, password);
+        if(usuario != null){
+            session.setAttribute("usuario", usuario);
+            return "redirect:/home";
+        } else {
             redirectAttributes.addFlashAttribute("erro", "CPF ou senha inválidos.");
         }
 
